@@ -9,7 +9,7 @@
 </div>
 
 <div align='center'>
-    <h3 style='color:red'>Note</h4>
+    <h3 font='red'>Note</h4>
     <p>create your virtual environment first before executing the command</p>
 </div>
 
