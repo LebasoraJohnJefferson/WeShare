@@ -13,9 +13,10 @@
     <p>create your virtual environment first before executing the command</p>
 </div>
 
-# how to install requirement
+<div align='center'>
+    how to install requirement
+</div>
 
-<img src="https://thumbs.dreamstime.com/b/command-line-interface-cli-vector-illustration-icon-152101358.jpg" style="width:2rem; height:2rem;" alt="cli">
-<p>
+<pre>
             -> pip install -r requirement
-</p>
+</pre>
