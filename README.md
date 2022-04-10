@@ -2,7 +2,7 @@
 
 project in python
 
-<h4 style='color:red'>note<h4>
+<h4 bg='red'>note<h4>
 <p>create your virtual environment first before executing the command</p>
 
 # how to install requirement
