@@ -14,7 +14,7 @@
 </div>
 
 # how to install requirement
-<img src="https://thumbs.dreamstime.com/b/command-line-interface-cli-vector-illustration-icon-152101358.jpg" alt="cli">
+<img src="https://thumbs.dreamstime.com/b/command-line-interface-cli-vector-illustration-icon-152101358.jpg" style="width:7px; height:7px" alt="cli">
 <pre>
         pip install -r requirement
 </pre>
