@@ -9,10 +9,12 @@
 </div>
 
 <div align='center'>
-    <h3 font='red'>Note</h4>
+    <h3>Note</h4>
     <p>create your virtual environment first before executing the command</p>
 </div>
 
 # how to install requirement
-
-pip install -r requirement
+<img src="https://thumbs.dreamstime.com/b/command-line-interface-cli-vector-illustration-icon-152101358.jpg" alt="cli">
+<pre>
+        pip install -r requirement
+</pre>
