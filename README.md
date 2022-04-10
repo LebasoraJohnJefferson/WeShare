@@ -18,5 +18,5 @@
 </div>
 
 <pre>
-            -> pip install -r requirement
+            -> pip install -r requirement.txt
 </pre>
