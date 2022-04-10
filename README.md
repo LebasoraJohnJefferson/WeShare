@@ -1,10 +1,11 @@
 # WeShare
 
 <div align='center'>
-    <h2>
+    <div>
         <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHLxxSOS1EacExleh0u6endvPLIbPd8vC_wQ&usqp=CAU' alt='python' style='width:5rem; height:5rem'>
-        project in python
-    </h2>
+        <br>
+        <h2>project in python</h2>
+    </div>
 </div>
 
 <div align='center'>
