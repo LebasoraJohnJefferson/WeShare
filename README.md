@@ -16,5 +16,5 @@
 # how to install requirement
 
 <pre>
-<img src="https://thumbs.dreamstime.com/b/command-line-interface-cli-vector-illustration-icon-152101358.jpg" style="border-radius:999px width:2.5rem; height:2.5rem" alt="cli">        -> pip install -r requirement
+<img src="https://thumbs.dreamstime.com/b/command-line-interface-cli-vector-illustration-icon-152101358.jpg" style="width:2.5rem; height:2.5rem; border-radius:999px;" alt="cli">        -> pip install -r requirement
 </pre>
