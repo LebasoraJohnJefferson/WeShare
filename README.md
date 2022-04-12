@@ -11,6 +11,7 @@
 <div align='center'>
     <h3>Note</h4>
     <p>create your virtual environment first before executing the command</p>
+    <p>also create your own .env that consist with your own "SECRET_KEY"</p>
 </div>
 
 <div align='center'>
