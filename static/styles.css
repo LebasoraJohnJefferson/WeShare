@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Babylonica&family=Beau+Rivage&family=Great+Vibes&family=Inconsolata:wght@200&family=Libre+Barcode+39+Text&family=Major+Mono+Display&family=Monoton&family=Rock+Salt&family=Rowdies&family=Rubik+Glitch&family=Rubik+Wet+Paint&family=Sarina&family=Secular+One&family=Sonsie+One&display=swap');
+
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Courier New', Courier, monospace;
+    color:white;
+}
+
+#article-text{
+    font-size:16px;
+}
+
+
+#logo{
+    font-family: 'Audiowide', cursive;
+    font-family: 'Babylonica', cursive;
+    font-family: 'Beau Rivage', cursive;
+    font-family: 'Great Vibes', cursive;
+    font-family: 'Inconsolata', monospace;
+    font-family: 'Libre Barcode 39 Text', cursive;
+    font-family: 'Major Mono Display', monospace;
+    font-family: 'Monoton', cursive;
+    font-family: 'Rock Salt', cursive;
+    font-family: 'Rowdies', cursive;
+    font-family: 'Rubik Glitch', cursive;
+    font-family: 'Rubik Wet Paint', cursive;
+    font-family: 'Sarina', cursive;
+    font-family: 'Secular One', sans-serif;
+    font-family: 'Sonsie One', cursive;
+}
+
+#profile{
+    width:60px;
+    height:60px;
+}
+
+@media only screen and (max-width: 600px){
+    #article-text{
+        font-size:12px;
+    }
+}
