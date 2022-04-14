@@ -1,0 +1,39 @@
+{% for _ in lebs%}
+<article class='container my-3 p-3 border border-warning w-75' style='min-width:19rem'>
+    <div class='row'>
+        <div class='col-1  w-auto '>
+            <img id='profile' class='img-thumbnail  rounded-circle' src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt='profile' />
+        </div>
+        <div class='col-8 py-2'>
+            <p class='row p-0 m-0'>James Michael Canete</p>
+            <p class='row p-0 m-0'>{% now "D  M d, Y" %}</p>
+        </div>
+    </div>
+    <hr  class='my-3 bg-warning' />
+    <div>
+        {% lorem 1 b random %}
+    </div>
+    <div class='container py-3 d-flex w-50 justify-content-center' style="min-width:100%">
+        <img class='w-100' src="https://images.pexels.com/photos/10901856/pexels-photo-10901856.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="content"/> 
+    </div>
+    <ul class='list-unstyled row text-dark bg-warning p-3' align="center">
+        <li class='col'>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-balloon-heart-fill" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8.49 10.92C19.412 3.382 11.28-2.387 8 .986 4.719-2.387-3.413 3.382 7.51 10.92l-.234.468a.25.25 0 1 0 .448.224l.04-.08c.009.17.024.315.051.45.068.344.208.622.448 1.102l.013.028c.212.422.182.85.05 1.246-.135.402-.366.751-.534 1.003a.25.25 0 0 0 .416.278l.004-.007c.166-.248.431-.646.588-1.115.16-.479.212-1.051-.076-1.629-.258-.515-.365-.732-.419-1.004a2.376 2.376 0 0 1-.037-.289l.008.017a.25.25 0 1 0 .448-.224l-.235-.468ZM6.726 1.269c-1.167-.61-2.8-.142-3.454 1.135-.237.463-.36 1.08-.202 1.85.055.27.467.197.527-.071.285-1.256 1.177-2.462 2.989-2.528.234-.008.348-.278.14-.386Z"/>
+              </svg>
+        </li>
+        <li class='col'>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-chat-square-dots-fill" viewBox="0 0 16 16">
+                <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.5a1 1 0 0 0-.8.4l-1.9 2.533a1 1 0 0 1-1.6 0L5.3 12.4a1 1 0 0 0-.8-.4H2a2 2 0 0 1-2-2V2zm5 4a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+            </svg>
+        </li>
+        <li class='col'>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-up-right-square-fill" viewBox="0 0 16 16">
+                <path d="M14 0a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12zM5.904 10.803 10 6.707v2.768a.5.5 0 0 0 1 0V5.5a.5.5 0 0 0-.5-.5H6.525a.5.5 0 1 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 .707.707z"/>
+              </svg>
+        </li>
+    <ul>
+
+</article>
+{% endfor %}
+
