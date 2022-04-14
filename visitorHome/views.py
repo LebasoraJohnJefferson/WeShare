@@ -4,3 +4,9 @@ from django.shortcuts import render
 
 def visitor_home(request):
     return render(request , 'visitorHome/visitor-home.html' , { 'lebs':'20' })
+
+def login(request):
+    return render(request , 'auth/login.html')
+
+def signup(request):
+    return render(request , 'auth/signup.html')
