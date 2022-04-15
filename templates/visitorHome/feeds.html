@@ -1,6 +1,8 @@
-{% for _ in lebs%}
+
+{% include "includes/post-content.html" %}
+{% for _ in lebs %}
 <article
-  class="container bg-dark my-3 p-3 border border-warning w-75"
+  class="container bg-dark rounded my-3 p-3 border w-100 border-warning"
   id='article'
 >
   <div class="row">
@@ -77,3 +79,5 @@
   </ul>
 </article>
 {% endfor %}
+
+{% include "includes/footer.html" %}

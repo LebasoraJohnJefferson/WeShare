@@ -6,16 +6,63 @@
     box-sizing: border-box;
 }
 
+
 body{
     font-family: 'Courier New', Courier, monospace;
     color:white;
-    
+    overflow-x: hidden;
 }
+
 
 #article-text{
     font-size:14px;
 }
 
+#upload{
+    display:none;
+}
+
+
+
+/* #aside */
+#aside.trigger{
+    display:none;
+}
+
+#aside{
+    position: sticky;
+    top:3.7rem;
+    z-index:1;
+}
+
+
+
+#profile{
+    width:60px;
+    height:60px;
+    object-fit:cover;
+}
+
+#profile-picture{
+    width:200px;
+    height: 200px;
+    object-fit:cover;
+}
+
+#img-container{
+    background-color:rgba(255,255,255,.05);
+}
+
+#img-article{
+    max-height:20rem;
+    min-width:50vw;
+    object-fit:none;
+}
+
+#icons:hover{
+    background-color: red;
+    color:white
+}
 
 #logo{
     font-family: 'Audiowide', cursive;
@@ -33,28 +80,6 @@ body{
     font-family: 'Sarina', cursive;
     font-family: 'Secular One', sans-serif;
     font-family: 'Sonsie One', cursive;
-}
-
-
-#profile{
-    width:60px;
-    height:60px;
-    object-fit:cover;
-}
-
-#img-container{
-    background-color:rgba(255,255,255,.05);
-}
-
-#img-article{
-    max-height:20rem;
-    min-width:50vw;
-    object-fit:none;
-}
-
-#icons:hover{
-    background-color: red;
-    color:white
 }
 
 @media only screen and (max-width: 600px){

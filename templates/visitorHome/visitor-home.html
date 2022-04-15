@@ -1,8 +1,16 @@
-{% extends '../index.html' %}
-
+{% extends 'index.html' %}
+{% block title %}WeShare{% endblock %}
 {% block content %}
-    {% include '../includes/header.html' %}
-    <main>
+
+    <header class="row-md py-2 text-white bg-dark sticky-top">
+        {% include 'includes/header.html' %}
+    </header>
+
+    <aside id="aside" class='col-xl-3 mt-xl-3 border border-warning h-100'>
+        {% include 'includes/navbar.html'%}
+    </aside>
+
+    <main class='col-md-8 m-auto'>
         {% include "./feeds.html" %}
     </main>
 {% endblock %}
