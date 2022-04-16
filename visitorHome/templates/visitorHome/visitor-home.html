@@ -6,11 +6,13 @@
         {% include 'includes/header.html' %}
     </header>
 
+    {% if user.is_authenticated %}
     <aside id="aside" class='col-md-3 mt-md-3 border border-warning h-100'>
         {% include 'includes/navbar.html'%}
     </aside>
+    {% endif %}
 
     <main class='col-md-8 m-auto'>
-        {% include "includes/feeds.html" %}
+        {% include "./includes/feeds.html" %}
     </main>
 {% endblock %}
