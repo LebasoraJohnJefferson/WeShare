@@ -2,17 +2,11 @@
 {% block title %}WeShare{% endblock %}
 {% block content %}
 
-    <header class="row-md py-2 text-white bg-dark sticky-top">
-        {% include 'includes/header.html' %}
-    </header>
+    {% include 'includes/header.html' %}
 
     {% if user.is_authenticated %}
-    <aside id="aside" class='col-md-3 mt-md-3 border border-warning h-100'>
         {% include 'includes/navbar.html'%}
-    </aside>
     {% endif %}
 
-    <main class='col-md-8 m-auto'>
-        {% include "./includes/feeds.html" %}
-    </main>
+    {% include "./includes/feeds.html" %}
 {% endblock %}

@@ -13,6 +13,10 @@ body{
     overflow-x: hidden;
 }
 
+#toast{
+    height:5rem;
+}
+
 
 #article-text{
     font-size:14px;

@@ -1,5 +1,7 @@
-
-{% include "../includes/post-content.html" %}
+<main class='col-md-8 m-auto'>
+{% if user.is_authenticated %}
+  {% include "../includes/post-content.html" %}
+{% endif %}
 {% for _ in lebs %}
 <article
   class="container bg-dark rounded my-3 p-3 border w-100 border-warning"
@@ -81,3 +83,4 @@
 {% endfor %}
 
 {% include "includes/footer.html" %}
+</main>

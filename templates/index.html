@@ -23,6 +23,14 @@
 
   <title>{% block title %} {% endblock %}</title>
 </head>
+  {% if messages %}
+    <ul id="toast" class="messages d-flex justify-content-center align-items-center list-unstyled m-3 rounded w-25 fixed-bottom bg-dark border border-warning">
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+  {% endif %}
+
 
   <body class="row bg-secondary" id="article-text">
     {% block content%} {% endblock %}
