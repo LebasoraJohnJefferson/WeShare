@@ -23,14 +23,15 @@
 
   <title>{% block title %} {% endblock %}</title>
 </head>
+  <div id="toastContainer" class='container'>
   {% if messages %}
-    <ul id="toast" class="messages d-flex justify-content-center align-items-center list-unstyled m-3 rounded w-25 fixed-bottom bg-dark border border-warning">
+    <ul id="toast" class="messages d-flex mx-3 w-50 justify-content-center align-items-center list-unstyled rounded fixed-bottom bg-dark border border-warning">
         {% for message in messages %}
         <li>{{ message }}</li>
         {% endfor %}
     </ul>
   {% endif %}
-
+  </div>
 
   <body class="row bg-secondary" id="article-text">
     {% block content%} {% endblock %}
