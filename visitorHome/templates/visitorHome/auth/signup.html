@@ -4,25 +4,16 @@
     {% include 'includes/header.html' %}
 
     <form class="w-75 m-auto mt-5 border border-warning bg-dark" method="POST" action="{% url 'Signup' %}">
-        {% csrf_token %}
+      {% csrf_token %}
         <h1 class="h3 mb-3 fw-normal p-3">Please Sign-up</h1>
-    
+        {% for field in form %}
         <div class="form-floating my-3">
-          <input name="username" type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
-          <label for="floatingInput" class="text-dark fs-6">Username</label>
+          <input name="{{field.name}}" {% if field.name == 'username' %} type="text" {% else %} type="password" {% endif %} class="form-control" id="floatingPassword" placeholder="{{field.label}}">
+          <label for="floatingPassword" class="text-dark fs-6">{{field.label}}</label>
         </div>
-        <div class="form-floating my-3">
-          <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
-          <label for="floatingPassword" class="text-dark fs-6">Password</label>
-        </div>
-
-        <div class="form-floating my-3">
-          <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
-          <label for="floatingPassword" class="text-dark fs-6">Confirm Password</label>
-        </div>
+        {% endfor %}
 
         <button class="w-100 btn btn-lg btn-warning mb-3" type="submit">Register</button>
       </form>
-
-
+    
 {% endblock %}

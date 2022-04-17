@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from .forms import UserForm
+from django.contrib.auth.forms import UserCreationForm
 # Create your views here.
 
 #header navigation links
@@ -11,7 +11,7 @@ header_links = [
     {'text':'Sign up','url':'Signup'},
     {'text':'Home','url':'visitor-home'},
 ]
-#header function to ignore links
+#header function to ignore links that not necessary
 def getLink(text):
     temp_list=[]
     for link_list in header_links:
@@ -27,22 +27,33 @@ def visitor_home(request):
 
     return render(request , 'visitorHome/visitor-home.html' , { 
         'lebs':'300',
-        'is_show_option':True,
         'Links':Links
      })
 
 
 def signup(request):
+    form = UserCreationForm()
     Links = getLink('Sign up')
+
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.username = user.username.lower()
+            user.save()
+            login(request,user)
+            return redirect('visitor-home')
+        else:
+            messages.error(request, 'An Error Occurred during registration!')
     return render(request , 'visitorHome/auth/signup.html' , {
-        'is_show_option':True,
-        'Links':Links
+        'Links':Links,
+        'form':form
     })
 
 def loginPage(request):
     Links = getLink('Login')
     if request.method == 'POST':
-        username=request.POST.get('username')
+        username=request.POST.get('username').lower()
         password=request.POST.get('password')
         try:
             user=User.objects.get(username=username)
@@ -71,5 +82,5 @@ def logoutPage(request):
 
 def profile(request):
     return render(request, 'visitorHome/profile.html',{
-        'is_show_option':False
+        
     })
