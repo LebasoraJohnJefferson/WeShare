@@ -13,6 +13,20 @@ body{
     overflow-x: hidden;
 }
 
+#links:last-child #linksText{
+    color:black
+}
+
+#links #linksText{
+    color:white;
+}
+
+#links:last-child{
+    padding:2px;
+    border-radius:.3rem;
+    background-color: #ffc107;
+}
+
 
 #toast{
     height:5rem;

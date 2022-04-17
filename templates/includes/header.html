@@ -8,12 +8,11 @@
     {% if is_show_option == True %}
     {% if not user.is_authenticated %}
     <ul class="nav px-md-3">
-      <li class="nav-item">
-        <a href="{% url url %}" class="nav-link text-light px-2">{{text | title}}</a>
+      {% for link in Links %}
+      <li id="links"  class="nav-item">
+        <a id="linksText" href="{% url link.url %}" class="nav-link px-2">{{ link.text | title}}</a>
       </li>
-      <li class="nav-item btn-warning rounded">
-        <a href="{% url "Signup"%}" class="nav-link text-dark px-2">Sign up</a>
-      </li>
+      {% endfor %}
       {% else %}
         <li id="nav-icon-holder" class="nav-item d-flex align-self-center justify-content-between btn-warning rounded">
           <div class="px-3 py-1">

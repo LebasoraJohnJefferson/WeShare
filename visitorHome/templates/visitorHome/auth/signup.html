@@ -1,7 +1,28 @@
 {% extends 'index.html' %}
 
 {% block content %}
-    <main>
-        Register
-    </main>
+    {% include 'includes/header.html' %}
+
+    <form class="w-75 m-auto mt-5 border border-warning bg-dark" method="POST" action="{% url 'Signup' %}">
+        {% csrf_token %}
+        <h1 class="h3 mb-3 fw-normal p-3">Please Sign-up</h1>
+    
+        <div class="form-floating my-3">
+          <input name="username" type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
+          <label for="floatingInput" class="text-dark fs-6">Username</label>
+        </div>
+        <div class="form-floating my-3">
+          <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
+          <label for="floatingPassword" class="text-dark fs-6">Password</label>
+        </div>
+
+        <div class="form-floating my-3">
+          <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
+          <label for="floatingPassword" class="text-dark fs-6">Confirm Password</label>
+        </div>
+
+        <button class="w-100 btn btn-lg btn-warning mb-3" type="submit">Register</button>
+      </form>
+
+
 {% endblock %}
