@@ -2,7 +2,7 @@
 {% if user.is_authenticated %}
   {% include "../includes/post-content.html" %}
 {% endif %}
-{% for _ in lebs %}
+{% for post in posts %}
 <article
   class="container bg-dark rounded my-3 p-3 border w-100 border-warning"
   id='article'
@@ -17,23 +17,25 @@
       />
     </div>
     <div class="col-8 py-2">
-      <p class="row p-0 m-0">James Michael Canete</p>
-      <p class="row p-0 m-0">{% now "D M d, Y" %}</p>
+      <p class="row p-0 m-0">{{post.post_owner.username}}</p>
+      <p class="row p-0 m-0">{{post.updated}}</p>
     </div>
   </div>
   <hr class="my-3 bg-warning" />
 
-  <div>{% lorem 1 b random %}</div>
+  <div class="pb-3">{{post.description}}</div>
+  {% if post.post_image%}
   <div
     class="container mt-3 p-3 d-flex w-100 justify-content-center"
     id='img-container'
   >
     <img
       id='img-article'
-      src="https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
+      src="media/{{post.post_image}}"
       alt="content"
     />
   </div>
+  {% endif %}
   <ul class="list-unstyled row bg-warning m-auto p-3" align="center">
     <li class="col">
       <svg

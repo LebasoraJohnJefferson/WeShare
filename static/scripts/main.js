@@ -1,7 +1,9 @@
 navClick = document.getElementById("nav-icon-holder");
 aside = document.getElementById("aside");
-camera=document.getElementById("uploadFileOpen");
-upload=document.getElementById("upload");
+
+camera=document.getElementById("uploadFileOpen"); //icon
+upload=document.getElementById("id_post_image"); //input
+
 toast=document.getElementById("toastContainer");
 
 if (navClick && aside){

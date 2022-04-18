@@ -3,6 +3,9 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
+from . models import Post
+from .forms import PostImageFrom
+# from PIL import Image
 # Create your views here.
 
 #header navigation links
@@ -22,12 +25,14 @@ def getLink(text):
     return temp_list
 
 def visitor_home(request):
-
+    posts = Post.objects.all()
     Links = getLink('Home')
+    form = PostImageFrom()
 
     return render(request , 'visitorHome/visitor-home.html' , { 
-        'lebs':'300',
-        'Links':Links
+        'posts':posts,
+        'Links':Links,
+        'form':form
      })
 
 
@@ -84,3 +89,19 @@ def profile(request):
     return render(request, 'visitorHome/profile.html',{
         
     })
+
+def post(request):
+    form = PostImageFrom(request.POST, request.FILES)
+    if request.method == 'POST':
+        if (request.POST.get('description').strip() !='' or request.POST.get('post_image')!=''):
+            if form.is_valid():
+                post = form.save(commit=False)
+                post.post_owner = request.user
+                post.save()
+            else:
+                messages.error(request,'Invalid image')
+        else:
+            messages.warning(request,'Say something..!!')
+    else:
+        messages.error(request,'Error Data!!')
+    return redirect('visitor-home')
