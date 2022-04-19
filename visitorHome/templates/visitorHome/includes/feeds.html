@@ -20,6 +20,13 @@
       <p class="row p-0 m-0">{{post.post_owner.username}}</p>
       <p class="row p-0 m-0">{{post.updated}}</p>
     </div>
+    <div class="col d-flex justify-content-end w-100 dropdown">
+      <button class="btn btn-warning dropdown-toggle p-1 h-50" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"></button>
+      <ul class="dropdown-menu bg-secondary border border-warning" aria-labelledby="dropdownMenuButton1">
+        <li><a class="text-warning dropdown-item" href="{% url "delete" post.id %}">DELETE</a></li>
+        <li><a class="text-warning dropdown-item" href="{% url "edit" post.id %}">EDIT</a></li>
+      </ul>
+    </div>
   </div>
   <hr class="my-3 bg-warning" />
 

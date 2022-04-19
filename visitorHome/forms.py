@@ -11,4 +11,4 @@ class UserForm(ModelForm):
 class PostImageFrom(ModelForm):
     class Meta:
         model = Post
-        fields = ['description','post_image']
+        fields = ['id','description','post_image']

@@ -105,3 +105,18 @@ def post(request):
     else:
         messages.error(request,'Error Data!!')
     return redirect('visitor-home')
+
+def deletePost(request,post_pk):
+    try:
+        post = Post.objects.get(id=post_pk)
+        if post.post_owner.id == request.user.id:
+            post.delete()
+        else:
+            messages.warning(request,'Request Denied!')
+    except:
+        messages.error(request,'No Post Found')
+    return redirect('visitor-home')
+
+def editPage(request,post_pk):
+    messages.success(request,post_pk)
+    return redirect('visitor-home')
