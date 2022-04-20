@@ -18,7 +18,8 @@
     crossorigin="anonymous"
     defer
   ></script>
-  <link rel="stylesheet" href="{% static 'styles/visitor-home.css'%}" />
+  <link href="https://cdn.jsdelivr.net/gh/hung1001/font-awesome-pro@bf7775b/css/all.css" rel='stylesheet' type='text/css' />
+  <link rel="stylesheet" href="{% static 'styles/globals.css'%}" />
   <script src="{% static 'scripts/main.js' %}" defer></script>
 
   <title>{% block title %} {% endblock %}</title>
@@ -33,7 +34,8 @@
   {% endif %}
   </div>
 
-  <body class="row bg-secondary" id="article-text">
+  <body class="row bg-secondary" id="article-text" style="position: relative; overflow-x: hidden;">
     {% block content%} {% endblock %}
   </body>
+  {% include "includes/footer.html" %}
 </html>

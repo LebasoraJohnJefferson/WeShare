@@ -1,0 +1,120 @@
+@import url("https://fonts.googleapis.com/css2?family=Sora&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  font-family: "Sora", sans-serif;
+}
+
+body {
+  font-family: "Sora", sans-serif;
+  color: white;
+  background: #000;
+}
+
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
+}
+
+#links:last-child #linksText {
+  color: black;
+}
+
+#links #linksText {
+  color: white;
+}
+
+#links:last-child {
+  padding: 2px;
+  border-radius: 0.3rem;
+  background-color: #ffc107;
+}
+
+#toast {
+  height: 5rem;
+}
+
+#article-text {
+  font-size: 14px;
+}
+
+#id_post_image {
+  display: none;
+}
+
+/* #aside */
+#aside.trigger {
+  display: none;
+}
+
+#aside {
+  position: sticky;
+  top: 3.7rem;
+  z-index: 1;
+}
+
+#profile {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+}
+
+#profile-picture {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+}
+
+#img-container {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+#img-article {
+  max-height: 20rem;
+  min-width: 50vw;
+  object-fit: none;
+}
+
+#icons:hover {
+  background-color: red;
+  color: white;
+}
+
+#logo {
+  font-family: "Audiowide", cursive;
+  font-family: "Babylonica", cursive;
+  font-family: "Beau Rivage", cursive;
+  font-family: "Great Vibes", cursive;
+  font-family: "Inconsolata", monospace;
+  font-family: "Libre Barcode 39 Text", cursive;
+  font-family: "Major Mono Display", monospace;
+  font-family: "Monoton", cursive;
+  font-family: "Rock Salt", cursive;
+  font-family: "Rowdies", cursive;
+  font-family: "Rubik Glitch", cursive;
+  font-family: "Rubik Wet Paint", cursive;
+  font-family: "Sarina", cursive;
+  font-family: "Secular One", sans-serif;
+  font-family: "Sonsie One", cursive;
+}
+
+@media only screen and (max-width: 600px) {
+  #article-text {
+    font-size: 12.5px;
+  }
+  #img-article {
+    min-width: 14rem;
+  }
+}

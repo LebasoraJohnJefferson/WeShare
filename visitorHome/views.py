@@ -14,6 +14,7 @@ header_links = [
     {'text':'Sign up','url':'Signup'},
     {'text':'Home','url':'visitor-home'},
 ]
+
 #header function to ignore links that not necessary
 def getLink(text):
     temp_list=[]
