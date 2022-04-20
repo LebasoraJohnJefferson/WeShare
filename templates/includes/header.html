@@ -1,14 +1,16 @@
-<header class="row-md py-2 text-white bg-dark sticky-top">
-  <div class="container d-flex flex-wrap">
-    <div class="nav me-auto">
-      <a class="text-decoration-none text-light" href="{% url 'visitor-home' %}"
-        ><h3 id="logo" class="px-3">WeShare</h3></a
-      >
+
+
+<header class="row-md py-3 text-white bg-dark sticky-top">
+  <div class="container d-flex flex-wrap align-items-center">
+    <div class="me-auto">
+      <a class="text-decoration-none text-light" href="{% url 'visitor-home' %}">
+        <img src="static/images/logo.svg" alt="logo" style="height: 40px;">
+      </a>
     </div>    
     {% if not user.is_authenticated %}
-    <ul class="nav px-md-3">
+    <ul class="nav px-md-3 d-flex align-items-center">
       {% for link in Links %}
-      <li id="links"  class="nav-item">
+      <li id="links"  class="nav-item" style="margin-left: 10px;">
         <a id="linksText" href="{% url link.url %}" class="nav-link px-2">{{ link.text | title}}</a>
       </li>
       {% endfor %}
