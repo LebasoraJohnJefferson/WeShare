@@ -134,3 +134,8 @@ def editPage(request,post_pk):
         'post':current_post,
         'post_pk': post_pk
     })
+
+
+def likePage(request,post_pk):
+    messages.warning(request,'under construction')
+    return redirect('visitor-home')
