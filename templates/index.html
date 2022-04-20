@@ -19,7 +19,9 @@
     defer
   ></script>
   <link href="https://cdn.jsdelivr.net/gh/hung1001/font-awesome-pro@bf7775b/css/all.css" rel='stylesheet' type='text/css' />
+  <link rel="stylesheet" href="{% static 'styles/editpostpage.css'%}" />
   <link rel="stylesheet" href="{% static 'styles/globals.css'%}" />
+  
   <script src="{% static 'scripts/main.js' %}" defer></script>
 
   <title>{% block title %} {% endblock %}</title>
@@ -35,6 +37,12 @@
   </div>
 
   <body class="row bg-secondary" id="article-text" style="position: relative; overflow-x: hidden;">
+    {% include 'includes/header.html' %}
+
+    {% if user.is_authenticated %}
+        {% include 'includes/navbar.html'%}
+    {% endif %}
+    
     {% block content%} {% endblock %}
   </body>
   {% include "includes/footer.html" %}

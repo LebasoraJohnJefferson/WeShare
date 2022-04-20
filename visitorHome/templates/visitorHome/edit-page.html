@@ -3,11 +3,65 @@
 {% block title%}WeShare | Edit-Post{% endblock %}
 
 {% block content %}
-    {% include 'includes/header.html' %}
 
-    {% include 'includes/navbar.html' %}
+<div
+  class="editpostpage_container col-md-8 mx-auto pt-4"
+>
 
-    {% include 'visitorHome/includes/edit-form.html' %}
+  <h3 class="mb-3">Edit Post</h3>
+  <form
+    class="row p-4 w-md-100 bg-dark"
+    method="POST"
+    action="{% url 'edit' post_pk %}"
+    enctype="multipart/form-data"
+  >
+    {% csrf_token %}
+    <div class="w-100 p-0">
+      <h6>Post Text Content</h6>
+      <textarea
+        class="bg-secondary w-100 rounded text-white"
+        name="description"
+        cols="20"
+        rows="4"
+        id="id_description"
+        placeholder="Please Input Something"
+      >{{ post.description }}</textarea>
+    </div>
 
+    {% if post.post_image %}
+    
+    <div class="image_container mt-4 p-0">
+      <h6>Post Image Content</h6>
+
+      <div class="wrapper">
+        <div class="image_wrapper w-100 p-0 w-md-100 m-auto">
+          <img
+            class="w-100"
+            src="/media/{{post.post_image}}"
+            alt="{{post.post_image}}"
+          />
+          <div class="">
+            <input
+              type="file"
+              name="post_image"
+              accept="image/*"
+              id="id_post_image"
+              onchange="loadFile(event)"
+            />
+            <div id="uploadFileOpenEdit" class="w-100">
+              <div style="text-align: center;">
+                <i class="fal fa-camera fa-5x"></i>
+              <h6>Change Image</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    <button class="bg-warning rounded p-2" type="submit">UPDATE</button>
+  </form>
+</div>
 
 {% endblock %}

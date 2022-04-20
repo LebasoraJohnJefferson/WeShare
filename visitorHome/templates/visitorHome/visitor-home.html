@@ -2,11 +2,5 @@
 {% block title %}WeShare{% endblock %}
 {% block content %}
 
-    {% include 'includes/header.html' %}
-
-    {% if user.is_authenticated %}
-        {% include 'includes/navbar.html'%}
-    {% endif %}
-
     {% include "./includes/feeds.html" %}
 {% endblock %}
