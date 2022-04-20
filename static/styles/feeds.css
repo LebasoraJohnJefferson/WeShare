@@ -1,0 +1,15 @@
+
+
+.post {
+  border-radius: 8px;
+}
+
+.interact .item {
+  border-radius: 8px;
+
+}
+
+.interact .item:hover {
+  background-color: rgb(50, 48, 48);
+  cursor: pointer;
+}
