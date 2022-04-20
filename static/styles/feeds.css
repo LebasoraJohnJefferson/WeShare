@@ -1,5 +1,16 @@
 
 
+.feeds_container {
+  min-height: fit-content;
+  height: 80vh;
+}
+
+.feeds_container .no_post__wrapper {
+  height: 300px;
+  display: grid;
+  place-items: center;
+}
+
 .post {
   border-radius: 8px;
 }
