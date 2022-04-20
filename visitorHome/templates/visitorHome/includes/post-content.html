@@ -2,7 +2,7 @@
     {% csrf_token %}
     <div class="form-label-group d-block">
         <label class='p-1 fs-4' for="post">Share your story:</label>
-        <textarea class='px-3 w-100 py-1 rounded' type="text" id="id_description" class="form-control" name="description" placeholder="What`s on your mind, {{request.user}}?"></textarea>
+        <textarea class='px-3 w-100 py-1 rounded' type="text" id="id_description" class="form-control" name="description" placeholder="What`s on your mind, {{request.user | title}}?"></textarea>
         <input type="file" id="id_post_image" name="post_image" accept="image/*"/>
     </div>
     <hr class="border border-warning" />

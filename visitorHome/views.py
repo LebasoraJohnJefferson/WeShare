@@ -87,7 +87,6 @@ def logoutPage(request):
 
 def profile(request):
     return render(request, 'visitorHome/profile.html',{
-        
     })
 
 def post(request):
@@ -118,5 +117,19 @@ def deletePost(request,post_pk):
     return redirect('visitor-home')
 
 def editPage(request,post_pk):
-    messages.success(request,post_pk)
-    return redirect('visitor-home')
+    current_post = Post.objects.get(id=post_pk)
+    if request.method == "POST":
+        if (request.POST.get('description').strip() !='' or request.POST.get('post_image')!=''):
+            update_post = PostImageFrom(request.POST,request.FILES,instance=current_post)
+            if update_post.is_valid():
+                update_post.save()
+                return redirect('visitor-home')
+            else:
+                messages.warning(request,"Request Denied!!")
+        else:
+            messages.warning(request,"Request Denied!!")
+
+    return render(request,'visitorHome/edit-page.html',{
+        'post':current_post,
+        'post_pk': post_pk
+    })
