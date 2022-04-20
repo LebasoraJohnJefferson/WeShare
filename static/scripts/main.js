@@ -6,6 +6,7 @@ upload=document.getElementById("id_post_image"); //input
 
 
 postImageHolderTemp = document.getElementById('display_image')
+postCamera = document.getElementById('post_camera')
 
 toast=document.getElementById("toastContainer");
 
@@ -13,11 +14,16 @@ var image_holder =''
 
 var loadFile = function(event) {
     const [file] = upload.files
-    postImageHolderTemp.style.display="flex";
     if (file) {
         postImageHolderTemp.src = URL.createObjectURL(file)
     }
 };
+
+if(postCamera){
+    postCamera.addEventListener("click",()=>{
+        upload.click()
+    })
+}
 
 
 if (navClick && aside){
