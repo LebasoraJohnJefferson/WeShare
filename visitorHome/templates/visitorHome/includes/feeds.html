@@ -62,7 +62,7 @@
             <li class="col">
               <span class="item px-4 pb-3 pt-4">
                 <a href="{% url 'likes' post.id%}"><i class="fad fa-heart-circle fa-2x"></i></a>
-                  {{post.like_post.filter.count}}
+                  {{ post.count_like.count }}
               </span>
             </li>
             <li class="col">

@@ -1,3 +1,4 @@
+from atexit import register
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -14,6 +15,8 @@ class Post(models.Model):
         ordering = ('-updated',)
     def __int__(self):
         return self.post_owner
+    def count_like(self):
+        return self.like_post.filter(is_like=True)
 
 class Likes(models.Model):
     #the post
@@ -23,3 +26,6 @@ class Likes(models.Model):
     is_like = models.BooleanField(default=True)
     class Meta:
         verbose_name_plural = 'Likes'
+    def __bool__(self):
+        return self.is_like
+
