@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
-from . models import Post
+from . models import Post, Likes
 from .forms import PostImageFrom
 # from PIL import Image
 # Create your views here.
@@ -29,11 +29,14 @@ def visitor_home(request):
     posts = Post.objects.all()
     Links = getLink('Home')
     form = PostImageFrom()
-
+    # for post in posts:
+    #     likes = Likes.objects.select_related('liker','like_post').filter(is_like = True ,like_post=post.id).distinct()
+    #     count.append(Likes.objects.select_related('liker','like_post').filter(is_like = True ,like_post=post.id).distinct().count())
+        
     return render(request , 'visitorHome/visitor-home.html' , { 
         'posts':posts,
         'Links':Links,
-        'form':form
+        'form':form,
      })
 
 
@@ -137,5 +140,21 @@ def editPage(request,post_pk):
 
 
 def likePage(request,post_pk):
-    messages.warning(request,'under construction')
+    id = request.user.id
+    if request.user.is_authenticated:
+        if_user_exist = Likes.objects.filter(liker=id,like_post=post_pk)
+        if if_user_exist:
+            like = Likes.objects.get(liker=id,like_post=post_pk)
+            like.is_like = False if like.is_like else True
+            like.save()
+        else:
+            get_post = Post.objects.get(id=post_pk)
+            get_user = User.objects.get(id=id)
+            Likes.objects.create(
+                like_post = get_post,
+                liker = get_user,
+                is_like = True
+            )
+    else:
+        messages.warning(request,'Visitor request is prohibited!')
     return redirect('visitor-home')

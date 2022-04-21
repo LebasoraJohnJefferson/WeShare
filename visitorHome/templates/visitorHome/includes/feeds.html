@@ -27,7 +27,7 @@
             </div>
             <div class="col-8 py-2">
               <p class="row p-0 m-0">{{post.post_owner.username}}</p>
-              <p class="row p-0 m-0">{{post.updated}}</p>
+              <p class="row p-0 m-0">{{post.updated | timesince}} ago</p>
             </div>
             {% if request.user.id == post.post_owner.id%}
             <div class="col d-flex justify-content-end w-100 dropdown">
@@ -62,6 +62,7 @@
             <li class="col">
               <span class="item px-4 pb-3 pt-4">
                 <a href="{% url 'likes' post.id%}"><i class="fad fa-heart-circle fa-2x"></i></a>
+                  {{post.like_post.filter.count}}
               </span>
             </li>
             <li class="col">
