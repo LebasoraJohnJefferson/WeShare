@@ -157,7 +157,9 @@ def likePage(request,post_pk):
 
 def commentPage(request,post_pk):
     posts = Post.objects.filter(id = post_pk)
+    is_user_like = Likes.objects.filter(liker=request.user.id,is_like=True)  
     return render(request,'visitorHome/comment-page.html',{
         'posts':posts,
-        'show_post_form':True
+        'show_post_form':True,
+        'is_user_like':is_user_like
     })
