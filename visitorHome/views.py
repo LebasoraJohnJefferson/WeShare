@@ -28,15 +28,11 @@ def getLink(text):
 def visitor_home(request):
     posts = Post.objects.all()
     Links = getLink('Home')
-    form = PostImageFrom()
-    # for post in posts:
-    #     likes = Likes.objects.select_related('liker','like_post').filter(is_like = True ,like_post=post.id).distinct()
-    #     count.append(Likes.objects.select_related('liker','like_post').filter(is_like = True ,like_post=post.id).distinct().count())
-        
+    is_user_like = Likes.objects.filter(liker=request.user.id,is_like=True)  
     return render(request , 'visitorHome/visitor-home.html' , { 
         'posts':posts,
         'Links':Links,
-        'form':form,
+        'is_user_like':is_user_like
      })
 
 
@@ -158,3 +154,10 @@ def likePage(request,post_pk):
     else:
         messages.warning(request,'Visitor request is prohibited!')
     return redirect('visitor-home')
+
+def commentPage(request,post_pk):
+    posts = Post.objects.filter(id = post_pk)
+    return render(request,'visitorHome/comment-page.html',{
+        'posts':posts,
+        'show_post_form':True
+    })

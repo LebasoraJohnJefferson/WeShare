@@ -19,9 +19,7 @@ class Post(models.Model):
         return self.like_post.filter(is_like=True)
 
 class Likes(models.Model):
-    #the post
     like_post = models.ForeignKey(Post,related_name='like_post',on_delete=models.CASCADE)
-    #the liker of post
     liker = models.ForeignKey(User,related_name='liker',on_delete=models.CASCADE)
     is_like = models.BooleanField(default=True)
     class Meta:
