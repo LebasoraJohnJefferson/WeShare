@@ -27,12 +27,10 @@ def getLink(text):
 
 def visitor_home(request):
     posts = Post.objects.all()
-    likes = Likes.objects.filter(liker=request.user.id,is_like=True)
     Links = getLink('Home')
     return render(request , 'visitorHome/visitor-home.html' , { 
         'posts':posts,
         'Links':Links,
-        'likes':likes
      })
 
 

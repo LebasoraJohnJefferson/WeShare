@@ -61,20 +61,17 @@
           <ul class="interact list-unstyled row m-auto p-2" align="center">
             <li class="col">
               <span class="item px-4 pb-3 pt-4">
-                <a class='text-decoration-none' href="{% url 'likes' post.id%}">
-                  {{post.is_like}}
-                  {% comment %} #### fixed the problem here ######## {% endcomment %}
-                  {% for like in likes %}
-                  {% if like.liker.id == request.user.id and post.id == like.like_post.id and like.is_like == True%}
-                  
-                      <i class="text-danger fad fa-heart-circle fa-2x"></i>
-                  {% elif like.liker.id == request.user.id and post.id == like.like_post.id and like.is_like == False%}  
-                      <i class="text-light fad fa-heart-circle fa-2x"></i>
-                  {% elif forloop.counter == likes|length%} 
+                <a class='text-decoration-none' href="{% url 'likes' post.id %}">
+                  {% for like in post.count_like %}
+                    {% if post.post_owner == like.like_post.post_owner and like.is_like == True and request.user.id == like.liker.id %}
+                    <i class="text-danger fad fa-heart-circle fa-2x"></i>
+                  {% elif forloop.counter == post.count_like|length%}
+                    <i class="text-light fad fa-heart-circle fa-2x"></i>
+                    {% endif %}
+                    {% endfor %}
+                  {% if post.count_like|length == 0%}
                     <i class="text-light fad fa-heart-circle fa-2x"></i>
                   {% endif %}
-                  {% endfor %}
-
                   {{ post.count_like.count }}
                 </a>
               </span>
