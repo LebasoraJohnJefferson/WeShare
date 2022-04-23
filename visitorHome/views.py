@@ -1,8 +1,9 @@
 from django.shortcuts import redirect, render
-from django.contrib.auth.models import User
-from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 from . models import Post, Likes
 from .forms import PostImageFrom
 # from PIL import Image
@@ -21,7 +22,7 @@ def getLink(text):
     for link_list in header_links:
         if link_list['text']==text:
             pass
-        else:
+        else:   
             temp_list.append(link_list)
     return temp_list
 
@@ -47,7 +48,7 @@ def signup(request):
             login(request,user)
             return redirect('visitor-home')
         else:
-            messages.error(request, 'An Error Occurred during registration!')
+            messages.error(request, 'Invalid Information!')
     return render(request , 'visitorHome/auth/signup.html' , {
         'Links':Links,
         'form':form
@@ -77,16 +78,17 @@ def loginPage(request):
         'is_show_option':True
     })
 
-
+@login_required(login_url='Login')
 def logoutPage(request):
     logout(request)
     return redirect('visitor-home')
 
-
+@login_required(login_url='Login')
 def profile(request):
     return render(request, 'visitorHome/profile.html',{
     })
 
+@login_required(login_url='Login')
 def post(request):
     form = PostImageFrom(request.POST, request.FILES)
     if request.method == 'POST':
@@ -103,6 +105,7 @@ def post(request):
         messages.error(request,'Error Data!!')
     return redirect('visitor-home')
 
+@login_required(login_url='Login')
 def deletePost(request,post_pk):
     try:
         post = Post.objects.get(id=post_pk)
@@ -114,6 +117,7 @@ def deletePost(request,post_pk):
         messages.error(request,'No Post Found')
     return redirect('visitor-home')
 
+@login_required(login_url='Login')
 def editPage(request,post_pk):
     current_post = Post.objects.get(id=post_pk)
     if request.method == "POST":
@@ -132,7 +136,7 @@ def editPage(request,post_pk):
         'post_pk': post_pk
     })
 
-
+@login_required(login_url='Login')
 def likePage(request,post_pk):
     id = request.user.id
     if request.user.is_authenticated:
@@ -161,3 +165,4 @@ def commentPage(request,post_pk):
         'show_post_form':True,
         'is_user_like':is_user_like
     })
+
