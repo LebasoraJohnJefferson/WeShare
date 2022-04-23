@@ -31,7 +31,7 @@
             </div>
             {% if request.user.id == post.post_owner.id%}
             <div class="col d-flex justify-content-end w-100 dropdown">
-              <button class="btn btn-warning dropdown-toggle p-1 h-50" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"></button>
+              <button class="btn btn-secondary dropdown-toggle p-1 h-50" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"></button>
               <ul class="dropdown-menu bg-secondary border border-warning" aria-labelledby="dropdownMenuButton1">
                 <li><a class="text-warning dropdown-item" href="{% url "delete" post.id %}">DELETE</a></li>
                 <li><a class="text-warning dropdown-item" href="{% url "edit" post.id %}">EDIT</a></li>
@@ -102,8 +102,5 @@
 
     {% endif %}
 
-
-
   </div>
-
-  </main>
+</main>
