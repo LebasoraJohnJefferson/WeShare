@@ -1,9 +1,10 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login, logout
-from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.db.models import Q
 from . models import Post, Likes
 from .forms import PostImageFrom
 # from PIL import Image
@@ -27,7 +28,10 @@ def getLink(text):
     return temp_list
 
 def visitor_home(request):
-    posts = Post.objects.all()
+    que=request.GET.get('que') if request.GET.get('que') != None else ''
+    posts = Post.objects.filter(Q(description__icontains=que)|
+                                Q(post_owner__username__icontains=que)
+                                )
     Links = getLink('Home')
     return render(request , 'visitorHome/visitor-home.html' , { 
         'posts':posts,
@@ -165,4 +169,7 @@ def commentPage(request,post_pk):
         'show_post_form':True,
         'is_user_like':is_user_like
     })
+
+
+
 

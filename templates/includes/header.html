@@ -28,8 +28,8 @@
           </ul>
         </li>
       </ul>
-      <form>
-        <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+      <form method="get" action="{% url 'visitor-home' %}">
+        <input class="form-control" type="text" name="que" placeholder="Search" aria-label="Search">
       </form>
           </ul>
       {% endif %}
