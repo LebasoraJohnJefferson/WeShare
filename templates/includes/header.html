@@ -1,28 +1,39 @@
-
-
-<header class="row-md py-3 text-white bg-dark sticky-top  border-bottom border-secondary">
-  <div class="container d-flex flex-wrap align-items-center">
-    <div class="me-auto">
-      <a class="text-decoration-none text-light" href="{% url 'visitor-home' %}">
-        <img src="/media/assets/logo.svg" alt="logo" style="height: 40px;">
-      </a>
-    </div>    
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top" aria-label="Eighth navbar example">
+  <div class="container">
+    <a class="text-decoration-none text-light" href="{% url 'visitor-home' %}">
+      <img src="/media/assets/logo.svg" alt="logo" style="height: 40px;">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
     {% if not user.is_authenticated %}
-    <ul class="nav px-md-3 d-flex align-items-center">
-      {% for link in Links %}
-      <li id="links"  class="nav-item" style="margin-left: 10px;">
-        <a id="linksText" href="{% url link.url %}" class="nav-link px-2">{{ link.text | title}}</a>
-      </li>
-      {% endfor %}
-      {% else %}
-        <li id="nav-icon-holder" class="nav-item d-flex align-self-center justify-content-between btn-warning rounded">
-          <div class="px-3 py-1">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
-            </svg>
-          </div>
+        <ul class="nav px-md-3 d-flex align-items-center">
+          {% for link in Links %}
+          <li id="links"  class="nav-item" style="margin-left: 10px;">
+            <a id="linksText" href="{% url link.url %}" class="nav-link px-2">{{ link.text | title}}</a>
+          </li>
+    {% endfor %}
+    {% else %}
+    <div class="collapse navbar-collapse" id="navbarsExample07">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'visitor-home' %}">Home</a>
         </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdown07" data-bs-toggle="dropdown" aria-expanded="false">{{request.user | title}}</a>
+          <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-macos mx-0 border-0 shadow" aria-labelledby="dropdown">
+            <li><a class="dropdown-item text-light" href="#"><small>Action</small></a></li>
+            <li><a class="dropdown-item text-light " href="#"><small>Another action</small></a></li>
+            <li><a class="dropdown-item text-light" href="{% url 'Logout'%}"><small class='text-warning'>Log out</small></a></li>
+          </ul>
+        </li>
+      </ul>
+      <form>
+        <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+      </form>
+          </ul>
       {% endif %}
-    </ul>
+
+    </div>
   </div>
-</header>
+</nav>

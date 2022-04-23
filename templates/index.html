@@ -38,12 +38,7 @@
 
   <body class="row bg-secondary" id="article-text" style="position: relative; overflow-x: hidden;">
     {% include 'includes/header.html' %}
-
-    {% if user.is_authenticated %}
-        {% include 'includes/navbar.html'%}
-    {% endif %}
-    
     {% block content%} {% endblock %}
+    {% include "includes/footer.html" %}
   </body>
-  {% include "includes/footer.html" %}
 </html>

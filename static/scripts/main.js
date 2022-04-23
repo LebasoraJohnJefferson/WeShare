@@ -1,6 +1,3 @@
-navClick = document.getElementById("nav-icon-holder");
-aside = document.getElementById("aside");
-
 camera=document.getElementById("uploadFileOpen"); //icon
 upload=document.getElementById("id_post_image"); //input
 
@@ -22,13 +19,6 @@ var loadFile = function(event) {
 if(postCamera){
     postCamera.addEventListener("click",()=>{
         upload.click()
-    })
-}
-
-
-if (navClick && aside){
-    navClick.addEventListener("click",()=>{
-        aside.classList.toggle("trigger")
     })
 }
 
