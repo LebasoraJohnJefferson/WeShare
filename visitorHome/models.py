@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 
 class Post(models.Model):
     post_owner = models.ForeignKey(User,related_name='post_user',on_delete=models.CASCADE)
+    liked = models.ManyToManyField(User,related_name='liked')
     description = models.TextField(blank=True)
     post_image = models.ImageField(upload_to='images/posts/',null=True,blank=True)
     created = models.DateTimeField(auto_now_add=True)
