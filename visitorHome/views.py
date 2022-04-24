@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.db.models import Q
-from . models import Post, Likes
+from . models import Post
 from .forms import PostImageFrom
 # from PIL import Image
 # Create your views here.
@@ -146,20 +146,6 @@ def likePage(request,post_pk):
     user_like = User.objects.get(id=request.user.id)
     all_post = Post.objects.get(id=post_pk)
     if request.user.is_authenticated:
-        if_user_exist = Likes.objects.filter(liker=id,like_post=post_pk)
-        if if_user_exist:
-            like = Likes.objects.get(liker=id,like_post=post_pk)
-            like.is_like = False if like.is_like else True
-            like.save()
-        else:
-            get_post = Post.objects.get(id=post_pk)
-            get_user = User.objects.get(id=id)
-            Likes.objects.create(
-                like_post = get_post,
-                liker = get_user,
-                is_like = True
-            )
-        
         if request.user in all_post.liked.all():
             all_post.liked.remove(request.user)
         else:
@@ -170,11 +156,9 @@ def likePage(request,post_pk):
 
 def commentPage(request,post_pk):
     posts = Post.objects.filter(id = post_pk)
-    is_user_like = Likes.objects.filter(liker=request.user.id,is_like=True)  
     return render(request,'visitorHome/comment-page.html',{
         'posts':posts,
         'show_post_form':True,
-        'is_user_like':is_user_like
     })
 
 

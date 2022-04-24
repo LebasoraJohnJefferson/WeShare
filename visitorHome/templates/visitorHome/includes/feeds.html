@@ -49,7 +49,7 @@
             >
               <img
                 id='img-article'
-                src="media/{{post.post_image}}"
+                src="/media/{{post.post_image}}"
                 alt="content"
                 class="w-100"
                 style="object-fit: cover;"
@@ -67,7 +67,7 @@
                   {% else %}
                     <i class="text-light fad fa-heart-circle fa-2x"></i>
                   {% endif %}
-                  {{ post.count_like.count }}
+                  {{ post.liked.all.count }}
                 </a>
               </span>
             </li>

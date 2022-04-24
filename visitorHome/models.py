@@ -15,15 +15,4 @@ class Post(models.Model):
         ordering = ('-updated',)
     def __int__(self):
         return self.post_owner
-    def count_like(self):
-        return self.like_post.filter(is_like=True)
-
-class Likes(models.Model):
-    like_post = models.ForeignKey(Post,related_name='like_post',on_delete=models.CASCADE)
-    liker = models.ForeignKey(User,related_name='liker',on_delete=models.CASCADE)
-    is_like = models.BooleanField(default=True)
-    class Meta:
-        verbose_name_plural = 'Likes'
-    def __bool__(self):
-        return self.is_like
 
