@@ -1,4 +1,25 @@
+#comment-section{
+  height: 20rem;
+  overflow-y: scroll;
+}
 
+#comment-section::-webkit-scrollbar {
+  width: 7px;
+}
+
+#comment-section::-webkit-scrollbar-track {
+  background: #888;
+  border-radius:10px;
+}
+
+#comment-section::-webkit-scrollbar-thumb {
+  background: #ffbb33;
+  border-radius:10px;
+}
+
+#comment-section::-webkit-scrollbar-thumb:hover {
+  background: #ffcc44;
+}
 
 .feeds_container {
   min-height: 80vh;

@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.db.models import Q
-from . models import Post
+from . models import Post, Comment
 from .forms import PostImageFrom
 # from PIL import Image
 # Create your views here.
@@ -154,11 +154,31 @@ def likePage(request,post_pk):
         messages.warning(request,'Visitor request is prohibited!')
     return redirect('visitor-home')
 
+
 def commentPage(request,post_pk):
-    posts = Post.objects.filter(id = post_pk)
-    return render(request,'visitorHome/comment-page.html',{
+    try:
+        posts = Post.objects.filter(id = post_pk)
+        if request.user.is_authenticated:
+            Links=[]
+            if request.method == 'POST':
+                if request.POST.get('comment').strip() != '':
+                    Comment.objects.create(
+                        post_comment = Post.objects.get(id=post_pk),
+                        user_comment = request.user,
+                        context_comment = request.POST.get('comment')
+                    )
+                else:
+                    messages.warning(request,'Comment is empty!')
+        else:
+            Links = getLink('Home')
+    except:
+            messages.error(request,'No Post Found')
+            posts=[]
+            
+    return render(request,'visitorHome/visitor-home.html',{
         'posts':posts,
         'show_post_form':True,
+        'Links':Links
     })
 
 
