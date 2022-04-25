@@ -22,7 +22,7 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="dropdown07" data-bs-toggle="dropdown" aria-expanded="false">{{request.user | title}}</a>
           <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-macos mx-0 border-0 shadow" aria-labelledby="dropdown">
-            <li><a class="dropdown-item text-light" href="#"><small>Action</small></a></li>
+            <li><a class="dropdown-item text-light" href="{% url 'profile' request.user%}"><small>Profile</small></a></li>
             <li><a class="dropdown-item text-light " href="#"><small>Another action</small></a></li>
             <li><a class="dropdown-item text-light" href="{% url 'Logout'%}"><small class='text-warning'>Log out</small></a></li>
           </ul>

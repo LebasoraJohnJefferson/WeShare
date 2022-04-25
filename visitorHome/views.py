@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.db.models import Q
-from . models import Post, Comment
+from . models import Post, Comment,Profile
 from .forms import PostImageFrom
 # from PIL import Image
 # Create your views here.
@@ -86,11 +86,6 @@ def loginPage(request):
 def logoutPage(request):
     logout(request)
     return redirect('visitor-home')
-
-@login_required(login_url='Login')
-def profile(request):
-    return render(request, 'visitorHome/profile.html',{
-    })
 
 @login_required(login_url='Login')
 def post(request):
@@ -178,8 +173,28 @@ def commentPage(request,post_pk):
     return render(request,'visitorHome/visitor-home.html',{
         'posts':posts,
         'show_post_form':True,
-        'Links':Links
+        'Links':Links,
     })
+
+@login_required(login_url='Login')
+def profile(request,get_username):
+    if request.user.is_authenticated:
+        try:
+            current_user = User.objects.get(username=get_username)
+        except:
+            current_user=0
+        profile_info = Profile.objects.filter(user_profile=current_user)
+        posts = Post.objects.filter(post_owner = current_user)
+        if current_user == 0:
+            messages.error(request,get_username+' Does not Exist!')
+            return redirect('visitor-home')
+    return render(request, 'visitorHome/profile.html',{
+        'show_post_form':True,
+        'hide_comment':True,
+        'current_user':current_user,
+        'posts':posts,
+        'profile_info':profile_info
+})
 
 
 

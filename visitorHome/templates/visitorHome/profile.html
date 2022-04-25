@@ -2,9 +2,29 @@
 
 {% block content %}
 
-    {% block header %}
-
-        <div>this is profile</div>
-    {% endblock %}
-    
+    {% block header %}{% endblock %}
+    <div class='row-md-8 mx-auto'>
+        {% if profile_info %}
+            {% for profile in profile_info %}
+                <div class='row w-xl-100 justify-content-center'>
+                {% if profile.user_image %}
+                    <img class="img-thumbnail rounded-circle" src="/media/{{profile.user_image}}" alt="profile" style="width:5rem; height:5rem"/>
+                {% else %}
+                    <i class="img-thumbnail rounded-circle fad fa-user"></i>
+                {% endif %}
+                </div>
+                <p class="row w-xl-100 justify-content-center" >
+                @{{profile}}<br/>
+                {{profile.self_description}}
+                </p>
+                <hr class='col m-auto w-50 '/>
+            {% endfor %}
+        {% else %}
+                <i class="fad fa-user"></i>
+                {{current_user}}
+        {%endif%}
+    </div>
+    <div class='row-xl-8 justify-content-center'>
+        {% include './includes/feeds.html'%}
+    </div>
 {% endblock %}

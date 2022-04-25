@@ -6,7 +6,9 @@ urlpatterns = [
     path('login', views.loginPage , name="Login"),
     path('logout', views.logoutPage , name="Logout"),
     path('signup', views.signup , name="Signup"),
-    path('profile', views.profile , name="Profile"),
+
+    path('profile/<str:get_username>', views.profile , name="profile"),
+
     path('post', views.post , name="post"),
     path("post/delete/<str:post_pk>", views.deletePost , name="delete"),
     path("post/edit/<str:post_pk>/", views.editPage , name="edit"),

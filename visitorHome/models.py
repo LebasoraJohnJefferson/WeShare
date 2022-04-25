@@ -26,3 +26,15 @@ class Comment(models.Model):
     class Meta:
         verbose_name_plural = 'comments'
         ordering = ('-created_at',)
+
+
+class Profile(models.Model):
+    user_profile = models.OneToOneField(User,on_delete=models.CASCADE,primary_key=True,)
+    user_image = models.ImageField(upload_to='images/profiles_image/',null=True,blank=True)
+    first_name = models.CharField(max_length=50,null=True,blank=True)
+    last_name = models.CharField(max_length=50,null=True,blank=True)
+    self_description = models.TextField(max_length=255)
+    class Meta:
+        verbose_name_plural = 'user_profiles'
+    def __str__(self):
+        return 'Hi, I`am ' + self.first_name+ " " + self.last_name

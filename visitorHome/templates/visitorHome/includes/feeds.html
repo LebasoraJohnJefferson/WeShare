@@ -26,7 +26,7 @@
               />
             </div>
             <div class="col-8 py-2">
-              <p class="row p-0 m-0">{{post.post_owner.username}}</p>
+              <a class='text-decoration-none' href='{% url "profile" post.post_owner.username %}'><p class="row p-0 m-0">@{{post.post_owner.username | title}}</p></a>
               <p class="row p-0 m-0">{{post.updated | timesince}} ago</p>
             </div>
             {% if request.user.id == post.post_owner.id%}
@@ -84,14 +84,14 @@
               </span>
             </li>
           </ul>
-          {% if show_post_form %}
+          {% if show_post_form and hide_comment != True %}
           <hr class='bg-secondary'/>
           {% if post.post_comment.all %}
           <ul class='row w-100 pt-3' id="comment-section">
             {% for comment in post.post_comment.all %}
             <li class='row h-50 w-xl-100 py-3'>
               <span style='border-left:1px solid gold'>
-                <div class='p-0'>@{{ comment.user_comment | title}}<p style='font-size:10px'>{{comment.created_at|timesince}}</p></div>
+                <a <a class='text-decoration-none' href="{% url "profile" comment.user_comment %}"><div class='p-0'>@{{ comment.user_comment | title}}</a><p style='font-size:10px'>{{comment.created_at|timesince}}</p></div>
                 <hr>
                 <p>{{ comment.context_comment }}</p>
               </span>
