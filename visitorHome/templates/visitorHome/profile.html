@@ -3,27 +3,37 @@
 {% block content %}
 
     {% block header %}{% endblock %}
-    <div class='row-md-8 mx-auto'>
+    <div class='row mx-auto mt-3'>
         {% if profile_info %}
             {% for profile in profile_info %}
-                <div class='row w-xl-100 justify-content-center'>
-                {% if profile.user_image %}
-                    <img class="img-thumbnail rounded-circle" src="/media/{{profile.user_image}}" alt="profile" style="width:5rem; height:5rem"/>
-                {% else %}
-                    <i class="img-thumbnail rounded-circle fad fa-user"></i>
-                {% endif %}
+                <div class='row w-xl-100'>
+                    <div style="object-fit:contain;" class='d-flex justify-content-center align-items-center'>
+                    {% if profile.user_image %}
+                        <img class="border border-warning img-thumbnail rounded-circle" src="/media/{{profile.user_image}}" alt="profile" style="font-size:5.8rem;width:7rem; height:7rem"/>
+                    {% else %}
+                        <i class="img-thumbnail border border-warning rounded-circle text-dark fad fa-user" style="text-align:center;font-size:5.8rem;width:7rem; height:7rem"></i>
+                    {% endif %}
+                    </div>
                 </div>
-                <p class="row w-xl-100 justify-content-center" >
-                @{{profile}}<br/>
+                <p class="row pt-3 w-xl-100 justify-content-center" >
+                {{profile|title}}<br/>
                 {{profile.self_description}}
                 </p>
-                <hr class='col m-auto w-50 '/>
-            {% endfor %}
+                {% endfor %}
         {% else %}
-                <i class="fad fa-user"></i>
-                {{current_user}}
+            <div class='row w-xl-100'>
+                <div style="object-fit:contain;" class='d-flex justify-content-center align-items-center'>
+                    <i class="img-thumbnail border border-warning rounded-circle text-dark fad fa-user" style="text-align:center;font-size:5.8rem;width:7rem; height:7rem"></i>
+                </div>
+            <div>
+            <p class="pt-3 row w-xl-100 justify-content-center" >
+                @{{current_user | title}}<br/>
+                {{profile.self_description}}
+            </p>
         {%endif%}
+        <hr class='row w-50 m-auto my-1 border'/>
     </div>
+    <div class='container w-75 px-xl-5 mt-3'><h4 class='d-flex m-auto-md px-md-5'>Post of {{current_user|title}}:</h4></div>
     <div class='row-xl-8 justify-content-center'>
         {% include './includes/feeds.html'%}
     </div>

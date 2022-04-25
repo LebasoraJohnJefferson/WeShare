@@ -137,8 +137,6 @@ def editPage(request,post_pk):
 
 @login_required(login_url='Login')
 def likePage(request,post_pk):
-    id = request.user.id
-    user_like = User.objects.get(id=request.user.id)
     all_post = Post.objects.get(id=post_pk)
     if request.user.is_authenticated:
         if request.user in all_post.liked.all():
@@ -147,7 +145,7 @@ def likePage(request,post_pk):
             all_post.liked.add(request.user)
     else:
         messages.warning(request,'Visitor request is prohibited!')
-    return redirect('visitor-home')
+    return redirect(request.META.get('HTTP_REFERER'))
 
 
 def commentPage(request,post_pk):
