@@ -49,6 +49,7 @@ def signup(request):
             user = form.save(commit=False)
             user.username = user.username.lower()
             user.save()
+            Profile.objects.create(user_profile = user)
             login(request,user)
             return redirect('visitor-home')
         else:
@@ -181,18 +182,24 @@ def profile(request,get_username):
             current_user = User.objects.get(username=get_username)
         except:
             current_user=0
-        profile_info = Profile.objects.filter(user_profile=current_user)
-        posts = Post.objects.filter(post_owner = current_user)
         if current_user == 0:
             messages.error(request,get_username+' Does not Exist!')
             return redirect('visitor-home')
+        profile_info = Profile.objects.get(user_profile=current_user)
+        posts = Post.objects.filter(post_owner = current_user)
+        likes = Post.objects.filter(liked=current_user).count()
+        comments = Comment.objects.filter(user_comment=current_user).count()
+        number_posts = Post.objects.filter(post_owner=current_user).count()
     return render(request, 'visitorHome/profile.html',{
         'show_post_form':True,
         'hide_comment':True,
-        'current_user':current_user,
+        'profile_info':profile_info,
         'posts':posts,
-        'profile_info':profile_info
+        'likes':likes,
+        'comments':comments,
+        'number_posts':number_posts
 })
+
 
 
 

@@ -1,40 +1,43 @@
 {% extends 'index.html' %}
 
+{%block title %}WeShare | {{profile_info.user_profile | title}}{% endblock %}
 {% block content %}
 
-    {% block header %}{% endblock %}
-    <div class='row mx-auto mt-3'>
-        {% if profile_info %}
-            {% for profile in profile_info %}
-                <div class='row w-xl-100'>
-                    <div style="object-fit:contain;" class='d-flex justify-content-center align-items-center'>
-                    {% if profile.user_image %}
-                        <img class="border border-warning img-thumbnail rounded-circle" src="/media/{{profile.user_image}}" alt="profile" style="font-size:5.8rem;width:7rem; height:7rem"/>
+   <div class='row w-100 h-100 justify-content-center mt-2 mx-auto'>
+       <div class="col-md-8">
+           <div class="row border border-warning post bg-dark my-3 p-4 w-md-100">
+                <div class="col-md-4 d-lg-block">
+                    {% if profile_info.user_image %}
+                    <div class='w-100'>
+                    <img style="object-fit:cover rounded" class='w-100' height="300" src="/media/{{profile_info.user_image}}" alt="profile" style="object-fit:cover"/>
+                    </div>
                     {% else %}
-                        <i class="img-thumbnail border border-warning rounded-circle text-dark fad fa-user" style="text-align:center;font-size:5.8rem;width:7rem; height:7rem"></i>
+                    <svg class="bd-placeholder-img w-100 rounded" width="200" height="300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">No Profile Picture</text></svg>
                     {% endif %}
+                </div>
+                <div class="col p-4 d-flex flex-column position-static">
+                    <strong class="d-inline-block mb-2 text-warning">Details:</strong>
+                    <h3 class="mb-0">{{profile_info|title}}</h3>
+                    <ol class='row list-unstyled py-1'>
+                        <li class='col'>Likes: <span class='text-warning'>{{likes}}</span></li>
+                        <li class='col'>Posts: <span class='text-warning'>{{number_posts}}</span></li>
+                        <li class='col'>Comments: <span class='text-warning'>{{comments}}</span></li>
+                    </ol>
+                    <div class="mb-1 text-muted">Description:</div>
+                        <p class="card-text mb-auto">{{profile_info.self_description}}</p>
+                        {% if request.user == profile_info.user_profile %}
+                        <button class='bg-warning border-0 rounded mt-1 py-3'>EDIT PROFILE</button>
+                        {% endif %}
                     </div>
                 </div>
-                <p class="row pt-3 w-xl-100 justify-content-center" >
-                {{profile|title}}<br/>
-                {{profile.self_description}}
-                </p>
-                {% endfor %}
-        {% else %}
-            <div class='row w-xl-100'>
-                <div style="object-fit:contain;" class='d-flex justify-content-center align-items-center'>
-                    <i class="img-thumbnail border border-warning rounded-circle text-dark fad fa-user" style="text-align:center;font-size:5.8rem;width:7rem; height:7rem"></i>
-                </div>
-            <div>
-            <p class="pt-3 row w-xl-100 justify-content-center" >
-                @{{current_user | title}}<br/>
-                {{profile.self_description}}
-            </p>
-        {%endif%}
-        <hr class='row w-50 m-auto my-1 border'/>
+        </div>
+   </div>
+
+    <div class='container w-75 px-xl-5 mt-3'>
+        <h5 class='d-flex m-auto-md px-md-5'>Post of {{current_user|title}}:</h5>
     </div>
-    <div class='container w-75 px-xl-5 mt-3'><h4 class='d-flex m-auto-md px-md-5'>Post of {{current_user|title}}:</h4></div>
     <div class='row-xl-8 justify-content-center'>
         {% include './includes/feeds.html'%}
     </div>
 {% endblock %}
+

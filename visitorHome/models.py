@@ -29,7 +29,7 @@ class Comment(models.Model):
 
 
 class Profile(models.Model):
-    user_profile = models.OneToOneField(User,on_delete=models.CASCADE,primary_key=True,)
+    user_profile = models.OneToOneField(User,on_delete=models.CASCADE,primary_key=True,related_name='user_profile')
     user_image = models.ImageField(upload_to='images/profiles_image/',null=True,blank=True)
     first_name = models.CharField(max_length=50,null=True,blank=True)
     last_name = models.CharField(max_length=50,null=True,blank=True)
@@ -37,4 +37,7 @@ class Profile(models.Model):
     class Meta:
         verbose_name_plural = 'user_profiles'
     def __str__(self):
-        return 'Hi, I`am ' + self.first_name+ " " + self.last_name
+        if (self.first_name and self.last_name):
+            return self.first_name+ " " + self.last_name
+        else:
+            return self.user_profile.username
