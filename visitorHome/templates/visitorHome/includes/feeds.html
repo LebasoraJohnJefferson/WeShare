@@ -16,6 +16,23 @@
           class="border border-warning post container bg-dark my-3 p-4 w-100"
           id='article'
         >
+        {% if post.shared_user %}
+        <div class='row'>
+          <p class='col'>
+            Shared by:<a class='text-decoration-none' href='{% url "profile" post.shared_user %}'> @{{post.shared_user|title}}</a> | <small>{{post.shared_on|timesince}}</small>
+          </p>
+          {% if request.user.username == post.shared_user.username %}
+          <div class="col d-flex justify-content-end w-100 dropdown">
+            <button class="btn btn-secondary dropdown-toggle p-1 h-75" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"></button>
+            <ul class="dropdown-menu bg-secondary border border-warning" aria-labelledby="dropdownMenuButton1">
+              <li><a class="text-warning dropdown-item" href="{% url "delete" post.id %}">DELETE</a></li>
+            </ul>
+          </div>
+          {% endif %}
+        </div>
+        
+        <hr />
+        {% endif %}
           <div class="row">
             <div class="col-1 w-auto">
               <img
@@ -33,7 +50,7 @@
               <a class='text-decoration-none' href='{% url "profile" post.post_owner.username %}'><p class="row p-0 m-0">@{{post.post_owner.username | title}}</p></a>
               <p class="row p-0 m-0">{{post.updated | timesince}} ago {% if post.created != post.updated %}(Edited){%endif%}</p>
             </div>
-            {% if request.user.id == post.post_owner.id%}
+            {% if request.user.id == post.post_owner.id and not post.shared_user%}
             <div class="col d-flex justify-content-end w-100 dropdown">
               <button class="btn btn-secondary dropdown-toggle p-1 h-50" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"></button>
               <ul class="dropdown-menu bg-secondary border border-warning" aria-labelledby="dropdownMenuButton1">
@@ -84,8 +101,9 @@
             </li>
             <li class="col" >
               <span class="item px-4 pb-3 pt-4">
-                <i class="fad fa-share fa-2x"></i>
+                <a href="{% url 'share' post.id %}"><i class="text-light fad fa-share fa-2x"></i></a>
               </span>
+              {{post.shared.all.count}}
             </li>
           </ul>
           {% if show_post_form and hide_comment != True %}

@@ -69,7 +69,8 @@
             <label for="floatingInput">Last Name</label>
         </div>
         <div class="form-floating pb-1">
-            <textarea type="text" name="self_description" class="form-control bg-secondary w-100 rounded text-white border-0 b-1" id="floatingInput" placeholder="name@example.com">{{profile.self_description}}</textarea>
+            <textarea type="text" name="self_description" class="form-control bg-secondary w-100 rounded text-white border-0 b-1" id="floatingInput" placeholder="name@example.com">{% if profile.self_description %}{{profile.self_description}}{% endif %}
+            </textarea>
             <label for="floatingInput">Description</label>
         </div>
       </div>

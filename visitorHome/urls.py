@@ -15,4 +15,5 @@ urlpatterns = [
     path("post/like/<str:post_pk>/", views.likePage , name="likes"),
     path("post/comment/<str:post_pk>/", views.commentPage , name="comment"),
     path("post/edit/<str:post_pk>/", views.editPage , name="edit"),
+    path("post/share/<str:post_pk>/", views.sharePost , name="share"),
 ]

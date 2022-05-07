@@ -1,3 +1,4 @@
+from time import timezone
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -7,6 +8,7 @@ from django.contrib.auth.models import User
 from django.db.models import Q
 from . models import Post, Comment,Profile
 from .forms import PostImageFrom, ProfileForm
+from datetime import datetime
 # from PIL import Image
 # Create your views here.
 
@@ -109,13 +111,38 @@ def post(request):
 def deletePost(request,post_pk):
     try:
         post = Post.objects.get(id=post_pk)
-        if post.post_owner.id == request.user.id:
+        if post.post_owner.id == request.user.id or post.shared_user.id == request.user.id:
             post.delete()
         else:
             messages.warning(request,'Request Denied!')
     except:
         messages.error(request,'No Post Found')
-    return redirect('visitor-home')
+    return redirect(request.META.get('HTTP_REFERER'))
+
+
+@login_required(login_url='Login')
+def sharePost(request,post_pk):
+    try:
+        original_post = Post.objects.get(id=post_pk)
+    except:
+        messages.error(request,'Request Denied!!')
+        return redirect(request.META.get('HTTP_REFERER'))
+    if request.user not in original_post.shared.all():
+        new_post = Post(
+            post_owner = original_post.post_owner,
+            description = original_post.description,
+            post_image = original_post.post_image,
+            created = original_post.created,
+            updated = original_post.updated,
+            shared_on=datetime.now(),
+            shared_user = request.user,
+        )
+        new_post.save()
+        original_post.shared.add(request.user)
+        messages.success(request,'Successfully Share the Story!')
+    else:
+        messages.warning(request,"Already shared the post!")
+    return redirect(request.META.get('HTTP_REFERER'))
 
 @login_required(login_url='Login')
 def editPage(request,post_pk):
@@ -186,10 +213,15 @@ def profile(request,get_username):
             messages.error(request,get_username+' Does not Exist!')
             return redirect('visitor-home')
         profile_info = Profile.objects.get(user_profile=current_user)
-        posts = Post.objects.filter(post_owner = current_user)
+        posts = Post.objects.filter(
+                                Q(post_owner__username=request.user)|
+                                Q(shared_user=request.user)
+                                )
+        # posts = Post.objects.filter(post_owner = current_user)
         likes = Post.objects.filter(liked=current_user).count()
         comments = Comment.objects.filter(user_comment=current_user).count()
         number_posts = Post.objects.filter(post_owner=current_user).count()
+        shares = Post.objects.filter(shared_user=current_user).count()
     return render(request, 'visitorHome/profile.html',{
         'show_post_form':True,
         'hide_comment':True,
@@ -197,7 +229,8 @@ def profile(request,get_username):
         'posts':posts,
         'likes':likes,
         'comments':comments,
-        'number_posts':number_posts
+        'number_posts':number_posts,
+        'shares':shares
 })
 
 @login_required(login_url='Login')
@@ -207,12 +240,15 @@ def editProfile(request):
         update_profile = ProfileForm(request.POST,request.FILES,instance=profile)
         if update_profile.is_valid():
             update_profile.save()
+            messages.success(request,"Successfully Updated")
             return redirect(f'/profile/{request.user}')
         else:
             messages.warning(request,"Request Denied!!")
     return render(request,'visitorHome/edit-profile.html',{
         'profile':profile
     })
+
+
 
 
 

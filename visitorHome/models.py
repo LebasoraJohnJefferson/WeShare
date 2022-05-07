@@ -5,14 +5,17 @@ from django.contrib.auth.models import User
 
 class Post(models.Model):
     post_owner = models.ForeignKey(User,related_name='post_user',on_delete=models.CASCADE)
-    liked = models.ManyToManyField(User,related_name='liked')
+    liked = models.ManyToManyField(User,related_name='liked',blank=True)
     description = models.TextField(blank=True)
     post_image = models.ImageField(upload_to='images/posts/',null=True,blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    shared = models.ManyToManyField(User,related_name='shared',blank=True)
+    shared_user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name='+')
+    shared_on = models.DateTimeField(blank=True, null=True)
     class Meta:
         verbose_name_plural = 'posts'
-        ordering = ('-updated',)
+        ordering = ('-updated','shared_on',)
     def __int__(self):
         return self.post_owner
     def number_of_comment(self):
@@ -33,7 +36,7 @@ class Profile(models.Model):
     user_image = models.ImageField(upload_to='images/profiles_image/',null=True,blank=True)
     first_name = models.CharField(max_length=50,null=True,blank=True)
     last_name = models.CharField(max_length=50,null=True,blank=True)
-    self_description = models.TextField(max_length=255)
+    self_description = models.TextField(max_length=255, null=True, blank=True)
     class Meta:
         verbose_name_plural = 'user_profiles'
     def __str__(self):
