@@ -1,0 +1,83 @@
+{% extends 'index.html' %}
+
+{% block title%}WeShare | Edit-Profile{% endblock %}
+
+{% block content %}
+
+<div
+  class="editpostpage_container col-md-8 mx-auto pt-4"
+>
+
+  <h3 class="mb-3">Edit Profile</h3>
+  <form
+    class="row p-4 w-md-100 bg-dark"
+    method="POST"
+    action=""
+    enctype="multipart/form-data"
+  >
+    {% csrf_token %}
+    
+    <div class="image_container mt-4 p-0">
+      <h6>Profile Image</h6>
+
+      <div class="wrapper">
+        <div class="image_wrapper w-100 p-0 w-md-100 m-auto">
+          <img
+            class="w-100"
+            id="display_image"
+            {% if profile.user_image %}
+            src="/media/{{profile.user_image}}"
+            {% else %}
+            src="/media/assets/alternative-profile.png"
+            {% endif %}
+          />
+          <div class="">
+            <input
+              type="file"
+              name="user_image"
+              accept="image/*"
+              id="id_post_image"
+              onchange="loadFile(event)"
+            />
+            <div id="uploadFileOpenEdit" class="w-100">
+              <div style="text-align: center;">
+                <i class="fal fa-camera fa-5x" id="post_camera"></i>
+              <h6>Change Image</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="w-100 p-0">
+        <div class="form-floating pb-1">
+            <input type="text" class="form-control bg-secondary w-100 rounded text-white border-0 b-1" id="floatingInput" name='first_name' placeholder="Jhonny Sin" 
+            {% if profile.first_name %}
+            value="{{profile.first_name}}"
+            {% else %}
+            value=""
+            {% endif %}
+            >
+            <label for="floatingInput">First Name</label>
+        </div>
+        <div class="form-floating pb-1">
+            <input type="text" class="form-control bg-secondary w-100 rounded text-white border-0" id="floatingInput" name='last_name' placeholder="name@example.com" 
+            {% if profile.last_name %}
+            value="{{profile.last_name}}"
+            {% else %}
+            value=""
+            {% endif %} >
+            <label for="floatingInput">Last Name</label>
+        </div>
+        <div class="form-floating pb-1">
+            <textarea type="text" name="self_description" class="form-control bg-secondary w-100 rounded text-white border-0 b-1" id="floatingInput" placeholder="name@example.com">{{profile.self_description}}</textarea>
+            <label for="floatingInput">Description</label>
+        </div>
+      </div>
+    </div>
+    
+
+    <button class="bg-warning rounded p-2 border-0" type="submit">UPDATE</button>
+  </form>
+</div>
+
+{% endblock %}

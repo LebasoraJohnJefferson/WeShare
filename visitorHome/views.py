@@ -6,7 +6,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.db.models import Q
 from . models import Post, Comment,Profile
-from .forms import PostImageFrom
+from .forms import PostImageFrom, ProfileForm
 # from PIL import Image
 # Create your views here.
 
@@ -125,13 +125,13 @@ def editPage(request,post_pk):
             update_post = PostImageFrom(request.POST,request.FILES,instance=current_post)
             if update_post.is_valid():
                 update_post.save()
-                return redirect('visitor-home')
+                return redirect(f'/profile/{request.user}')
             else:
                 messages.warning(request,"Request Denied!!")
         else:
             messages.warning(request,"Request Denied!!")
 
-    return render(request,'visitorHome/edit-page.html',{
+    return render(request,'visitorHome/edit-post.html',{
         'post':current_post,
         'post_pk': post_pk
     })
@@ -199,6 +199,20 @@ def profile(request,get_username):
         'comments':comments,
         'number_posts':number_posts
 })
+
+@login_required(login_url='Login')
+def editProfile(request):
+    profile = Profile.objects.get(user_profile=request.user)
+    if request.method == 'POST':
+        update_profile = ProfileForm(request.POST,request.FILES,instance=profile)
+        if update_profile.is_valid():
+            update_profile.save()
+            return redirect(f'/profile/{request.user}')
+        else:
+            messages.warning(request,"Request Denied!!")
+    return render(request,'visitorHome/edit-profile.html',{
+        'profile':profile
+    })
 
 
 

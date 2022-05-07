@@ -7,13 +7,15 @@
        <div class="col-md-8">
            <div class="row border border-warning post bg-dark my-3 p-4 w-md-100">
                 <div class="col-md-4 d-lg-block">
-                    {% if profile_info.user_image %}
                     <div class='w-100'>
-                    <img style="object-fit:cover rounded" class='w-100' height="300" src="/media/{{profile_info.user_image}}" alt="profile" style="object-fit:cover"/>
+                        <img style="object-fit:cover;" class='w-100 rounded ' height="300"
+                        {% if profile_info.user_image %}
+                     src="/media/{{profile_info.user_image}}" 
+                     {% else %}
+                     src="/media/assets/alternative-profile.png" 
+                     {% endif %}
+                     alt="profile" style="object-fit:cover"/>
                     </div>
-                    {% else %}
-                    <svg class="bd-placeholder-img w-100 rounded" width="200" height="300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">No Profile Picture</text></svg>
-                    {% endif %}
                 </div>
                 <div class="col p-4 d-flex flex-column position-static">
                     <strong class="d-inline-block mb-2 text-warning">Details:</strong>
@@ -24,9 +26,9 @@
                         <li class='col'>Comments: <span class='text-warning'>{{comments}}</span></li>
                     </ol>
                     <div class="mb-1 text-muted">Description:</div>
-                        <p class="card-text mb-auto">{{profile_info.self_description}}</p>
+                        <p class="card-text mb-auto">{{profile_info.self_description|truncatechars:200}}</p>
                         {% if request.user == profile_info.user_profile %}
-                        <button class='bg-warning border-0 rounded mt-1 py-3'>EDIT PROFILE</button>
+                        <a href="{% url 'edit-profile'%}" class='text-center text-decoration-none text-white bg-warning border-0 rounded mt-1 py-3'>EDIT PROFILE</a>
                         {% endif %}
                     </div>
                 </div>

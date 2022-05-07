@@ -21,13 +21,17 @@
               <img
                 id="profile"
                 class="img-thumbnail rounded-circle"
-                src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                {% if post.post_owner.user_profile.user_image %}
+                src="/media/{{post.post_owner.user_profile.user_image}}"
+                {%else%}
+                src="/media/assets/alternative-profile.png"
+                {% endif %}
                 alt="profile"
               />
             </div>
             <div class="col-8 py-2">
               <a class='text-decoration-none' href='{% url "profile" post.post_owner.username %}'><p class="row p-0 m-0">@{{post.post_owner.username | title}}</p></a>
-              <p class="row p-0 m-0">{{post.updated | timesince}} ago</p>
+              <p class="row p-0 m-0">{{post.updated | timesince}} ago {% if post.created != post.updated %}(Edited){%endif%}</p>
             </div>
             {% if request.user.id == post.post_owner.id%}
             <div class="col d-flex justify-content-end w-100 dropdown">
