@@ -249,6 +249,9 @@ def editProfile(request):
     })
 
 
+def aboutus(request):
+    return render(request, 'visitorHome/aboutus.html')
+
 
 
 
