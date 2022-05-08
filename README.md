@@ -8,16 +8,32 @@
     </div>
 </div>
 
-<div align='center'>
-    <h3>Note</h4>
-    <p>create your virtual environment first before executing the command</p>
-    <p>also create your own .env that consist with your own "SECRET_KEY"</p>
-</div>
 
-<div align='center'>
-    how to install requirement
-</div>
+## Getting Started
 
-<pre>
-            -> pip install -r requirement.txt
-</pre>
+Install project dependencies:
+
+```bash
+pip install -r requirement.txt
+```
+
+Create a required environment variable:
+
+```bash
+echo SECRET_KEY=your-secret-key > .env
+```
+
+Migration configurations:
+
+```bash
+py manage.py makemigrations
+py manage.py migrate --run-syncdb
+```
+
+Start development server:
+
+```bash
+py manage.py runserver
+```
+
+Open [http://localhost:8000](http://localhost:8000) with your browser to see the result.
