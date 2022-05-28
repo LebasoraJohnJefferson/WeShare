@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config("SECRET_KEY")
+SECRET_KEY = "django-insecure-90e^sveg&ou9)2wrsgrroy5*3qg(2e@9)0mqq#f+**(kuy)4vq"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -129,7 +129,7 @@ STATICFILES_DIRS = [
 # putting post,profiles to gitignore and creating directory to avoid huge image store
 directories = ['posts','profiles_image']
 for directory in directories:
-    path = os.path.join(BASE_DIR / 'media/images',directory)
+    path = os.path.join( BASE_DIR / 'media/images',directory)
     if not os.path.exists(path):
         os.mkdir(path)
 

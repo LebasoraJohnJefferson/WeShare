@@ -31,10 +31,14 @@ def getLink(text):
 
 def visitor_home(request):
     que=request.GET.get('que') if request.GET.get('que') != None else ''
-    posts = Post.objects.filter(Q(description__icontains=que)|
-                                Q(post_owner__username__icontains=que)
-                                )
+    if User.objects.count() == 0 or Post.objects.count() == 0:
+        posts = Post.objects.filter(Q(description__icontains=que)|
+                            Q(post_owner__username__icontains=que))
+    
+    
     Links = getLink('Home')
+    
+    
     return render(request , 'visitorHome/visitor-home.html' , { 
         'posts':posts,
         'Links':Links,
@@ -51,11 +55,11 @@ def signup(request):
             user = form.save(commit=False)
             user.username = user.username.lower()
             user.save()
-            Profile.objects.create(user_profile = user)
             login(request,user)
+            Profile.objects.create(user_profile = user)
             return redirect('visitor-home')
         else:
-            messages.error(request, 'Invalid Information!')
+            messages.error(request, 'Password provided might be short or user already exist')
     return render(request , 'visitorHome/auth/signup.html' , {
         'Links':Links,
         'form':form
@@ -116,7 +120,7 @@ def deletePost(request,post_pk):
         else:
             messages.warning(request,'Request Denied!')
     except:
-        messages.error(request,'No Post Found')
+        messages.error(request,'No Post3 Found')
     return redirect(request.META.get('HTTP_REFERER'))
 
 
