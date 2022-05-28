@@ -127,9 +127,11 @@ STATICFILES_DIRS = [
 ]
 
 # putting post,profiles to gitignore and creating directory to avoid huge image store
-directories = ['posts','profiles_image']
+
+directories = ['images','images/posts','images/profiles_image']
+
 for directory in directories:
-    path = os.path.join( BASE_DIR / 'media/images',directory)
+    path = os.path.join( BASE_DIR / 'media',directory)
     if not os.path.exists(path):
         os.mkdir(path)
 
