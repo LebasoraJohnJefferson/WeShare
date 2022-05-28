@@ -14,7 +14,7 @@
 Install project dependencies:
 
 ```bash
-pip install -r requirement.txt
+pip install -r requirements.txt
 ```
 
 Create a required environment variable:
@@ -28,6 +28,11 @@ Migration configurations:
 ```bash
 py manage.py makemigrations
 py manage.py migrate --run-syncdb
+```
+
+SECRET_KEY DEMO:
+```bash
+SECRET_KEY=django-insecure-90e^sveg&ou9)2wrsgrroy5*3qg(2e@9)0mqq#f+**(kuy)4vq
 ```
 
 Start development server:
