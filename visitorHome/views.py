@@ -31,11 +31,9 @@ def getLink(text):
 
 def visitor_home(request):
     que=request.GET.get('que') if request.GET.get('que') != None else ''
-    if User.objects.count() == 0 or Post.objects.count() == 0:
-        posts = Post.objects.filter(Q(description__icontains=que)|
+    posts = Post.objects.filter(Q(description__icontains=que)|
                             Q(post_owner__username__icontains=que))
-    
-    
+
     Links = getLink('Home')
     
     

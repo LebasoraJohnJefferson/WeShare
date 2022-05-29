@@ -113,8 +113,11 @@
             {% for comment in post.post_comment.all %}
             <li class='row h-50 w-xl-100 py-3'>
               <span style='border-left:1px solid gold'>
-                <a <a class='text-decoration-none' href="{% url "profile" comment.user_comment %}"><div class='p-0'>@{{ comment.user_comment | title}}</a><p style='font-size:10px'>{{comment.created_at|timesince}}</p></div>
-                <hr>
+                <a class='text-decoration-none' href="{% url 'profile' comment.user_comment %}">
+                   <div class='p-0'>@{{ comment.user_comment | title}}</div>
+                </a>
+                  <p style='font-size:10px'>{{comment.created_at|timesince}}</p>
+                  <hr>
                 <p>{{ comment.context_comment }}</p>
               </span>
             </li>
