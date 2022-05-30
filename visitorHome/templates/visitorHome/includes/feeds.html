@@ -7,151 +7,133 @@
 <main class='col-md-8 mx-auto'>
   <div class="feeds_container">
     {% if user.is_authenticated and not show_post_form%}
-      {% include "../includes/post-content.html" %}
+    {% include "../includes/post-content.html" %}
     {% endif %}
 
     {% if posts %}
-      {% for post in posts %}
-        <article
-          class="border border-warning post container bg-dark my-3 p-4 w-100"
-          id='article'
-        >
-        {% if post.shared_user %}
-        <div class='row'>
-          <p class='col'>
-            Shared by:<a class='text-decoration-none' href='{% url "profile" post.shared_user %}'> @{{post.shared_user|title}}</a> | <small>{{post.shared_on|timesince}}</small>
-          </p>
-          {% if request.user.username == post.shared_user.username %}
-          <div class="col d-flex justify-content-end w-100 dropdown">
-            <button class="btn btn-secondary dropdown-toggle p-1 h-75" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"></button>
-            <ul class="dropdown-menu bg-secondary border border-warning" aria-labelledby="dropdownMenuButton1">
-              <li><a class="text-warning dropdown-item" href="{% url "delete" post.id %}">DELETE</a></li>
-            </ul>
-          </div>
-          {% endif %}
+    {% for post in posts %}
+    <article class="border border-warning post container bg-dark my-3 p-4 w-100" id='article'>
+      {% if post.shared_user %}
+      <div class='row'>
+        <p class='col'>
+          Shared by:<a class='text-decoration-none' href='{% url "profile" post.shared_user %}'>
+            @{{post.shared_user|title}}</a> | <small>{{post.shared_on|timesince}}</small>
+        </p>
+        {% if request.user.username == post.shared_user.username %}
+        <div class="col d-flex justify-content-end w-100 dropdown">
+          <button class="btn btn-secondary dropdown-toggle p-1 h-75" type="button" id="dropdownMenuButton1"
+            data-bs-toggle="dropdown" aria-expanded="false"></button>
+          <ul class="dropdown-menu bg-secondary border border-warning" aria-labelledby="dropdownMenuButton1">
+            <li><a class="text-warning dropdown-item" href="{% url  'delete' post.id %}"
+                onclick="return confirm('Are you sure, you want to Delete this?')">DELETE</a></li>
+          </ul>
         </div>
-        
-        <hr />
         {% endif %}
-          <div class="row">
-            <div class="col-1 w-auto">
-              <img
-                id="profile"
-                class="img-thumbnail rounded-circle"
-                {% if post.post_owner.user_profile.user_image %}
-                src="/media/{{post.post_owner.user_profile.user_image}}"
-                {%else%}
-                src="/media/assets/alternative-profile.png"
-                {% endif %}
-                alt="profile"
-              />
-            </div>
-            <div class="col-8 py-2">
-              <a class='text-decoration-none' href='{% url "profile" post.post_owner.username %}'><p class="row p-0 m-0">@{{post.post_owner.username | title}}</p></a>
-              <p class="row p-0 m-0">{{post.updated | timesince}} ago {% if post.created != post.updated %}(Edited){%endif%}</p>
-            </div>
-            {% if request.user.id == post.post_owner.id and not post.shared_user%}
-            <div class="col d-flex justify-content-end w-100 dropdown">
-              <button class="btn btn-secondary dropdown-toggle p-1 h-50" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"></button>
-              <ul class="dropdown-menu bg-secondary border border-warning" aria-labelledby="dropdownMenuButton1">
-                <li><a class="text-warning dropdown-item" href="{% url "delete" post.id %}">DELETE</a></li>
-                <li><a class="text-warning dropdown-item" href="{% url "edit" post.id %}">EDIT</a></li>
-              </ul>
-            </div>
-            {% endif %}
-          </div>
+      </div>
 
-          <div class="mt-3">{{post.description}}</div>
-
-          {% if post.post_image%}
-            <div
-              class="mt-3 w-100"
-              id='img-container'
-            >
-              <img
-                id='img-article'
-                src="/media/{{post.post_image}}"
-                alt="content"
-                class="w-100"
-                style="object-fit: cover;"
-              />
-            </div>
-          {% endif %}
-
-          <hr class="bg-secondary" />
-          <ul class="interact list-unstyled row m-auto p-2" align="center">
-            <li class="col">
-              <span class="item px-4 pb-3 pt-4">
-                <a class='text-decoration-none' href="{% url 'likes' post.id %}">
-                  {% if user in post.liked.all %}
-                    <i class="text-danger fad fa-heart-circle fa-2x"></i>
-                  {% else %}
-                    <i class="text-light fad fa-heart-circle fa-2x"></i>
-                  {% endif %}
-                  {{ post.liked.all.count }}
-                </a>
-              </span>
-            </li>
-            <li class="col">
-              <span class="item px-4 pb-3 pt-4">
-                <a href="{% url 'comment' post.id %}"><i class="text-light fad fa-comment-dots fa-2x" ></i></a>
-                {{post.number_of_comment.count}}
-              </span>
-              
-            </li>
-            <li class="col" >
-              <span class="item px-4 pb-3 pt-4">
-                <a href="{% url 'share' post.id %}"><i class="text-light fad fa-share fa-2x"></i></a>
-              </span>
-              {{post.shared.all.count}}
-            </li>
+      <hr />
+      {% endif %}
+      <div class="row">
+        <div class="col-1 w-auto">
+          <img id="profile" class="img-thumbnail rounded-circle" {% if post.post_owner.user_profile.user_image %}
+            src="/media/{{post.post_owner.user_profile.user_image}}" {%else%}
+            src="/media/assets/alternative-profile.png" {% endif %} alt="profile" />
+        </div>
+        <div class="col-8 py-2">
+          <a class='text-decoration-none' href='{% url "profile" post.post_owner.username %}'>
+            <p class="row p-0 m-0">@{{post.post_owner.username | title}}</p>
+          </a>
+          <p class="row p-0 m-0">{{post.updated | timesince}} ago {% if post.created != post.updated %}(Edited){%endif%}
+          </p>
+        </div>
+        {% if request.user.id == post.post_owner.id and not post.shared_user%}
+        <div class="col d-flex justify-content-end w-100 dropdown">
+          <button class="btn btn-secondary dropdown-toggle p-1 h-50" type="button" id="dropdownMenuButton1"
+            data-bs-toggle="dropdown" aria-expanded="false"></button>
+          <ul class="dropdown-menu bg-secondary border border-warning" aria-labelledby="dropdownMenuButton1">
+            <li><a class="text-warning dropdown-item" href="{% url  'delete' post.id %}"
+                onclick="return confirm('Are you sure, you want to Delete this?')">DELETE</a></li>
+            <li><a class="text-warning dropdown-item" href="{% url  'edit' post.id %}">EDIT</a></li>
           </ul>
-          {% if show_post_form and hide_comment != True %}
-          <hr class='bg-secondary'/>
-          {% if post.post_comment.all %}
-          <ul class='row w-100 pt-3' id="comment-section">
-            {% for comment in post.post_comment.all %}
-            <li class='row h-50 w-xl-100 py-3'>
-              <span style='border-left:1px solid gold'>
-                <a class='text-decoration-none' href="{% url 'profile' comment.user_comment %}">
-                   <div class='p-0'>@{{ comment.user_comment | title}}</div>
-                </a>
-                  <p style='font-size:10px'>{{comment.created_at|timesince}}</p>
-                  <hr>
-                <p>{{ comment.context_comment }}</p>
-              </span>
-            </li>
-            {% endfor %}
-          </ul>
-          {% endif %}
-          {% if request.user.is_authenticated %}
-          <form class="row container w-xl-100" action="" method="post">
-            {% csrf_token %}
-            <input class="col mx-3 rounded w-100 bg-dark text-light border" name='comment' placeholder='Comment...'>
-            <button class='col-2 rounded p-2 bg-secondary border-0'><svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="25"
-              height="25"
-              fill='#fff'
-              class="bi bi-send"
-              viewBox="0 0 16 16"
-            >
-              <path
-                d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z"
-              />
-            </svg></button>
-          </form>
-          {% endif %}
-          {% endif %}
+        </div>
+        {% endif %}
+      </div>
+
+      <div class="mt-3">{{post.description}}</div>
+
+      {% if post.post_image%}
+      <div class="mt-3 w-100" id='img-container'>
+        <img id='img-article' src="/media/{{post.post_image}}" alt="content" class="w-100" style="object-fit: cover;" />
+      </div>
+      {% endif %}
+
+      <hr class="bg-secondary" />
+      <ul class="interact list-unstyled row m-auto p-2" align="center">
+        <li class="col">
+          <span class="item px-4 pb-3 pt-4">
+            <a class='text-decoration-none' href="{% url 'likes' post.id %}">
+              {% if user in post.liked.all %}
+              <i class="text-danger fad fa-heart-circle fa-2x"></i>
+              {% else %}
+              <i class="text-light fad fa-heart-circle fa-2x"></i>
+              {% endif %}
+              {{ post.liked.all.count }}
+            </a>
+          </span>
+        </li>
+        <li class="col">
+          <span class="item px-4 pb-3 pt-4">
+            <a href="{% url 'comment' post.id %}"><i class="text-light fad fa-comment-dots fa-2x"></i></a>
+            {{post.number_of_comment.count}}
+          </span>
+
+        </li>
+        <li class="col">
+          <span class="item px-4 pb-3 pt-4">
+            <a href="{% url 'share' post.id %}"><i class="text-light fad fa-share fa-2x"></i></a>
+          </span>
+          {{post.shared.all.count}}
+        </li>
+      </ul>
+      {% if show_post_form and hide_comment != True %}
+      <hr class='bg-secondary' />
+      {% if post.post_comment.all %}
+      <ul class='row w-100 pt-3' id="comment-section">
+        {% for comment in post.post_comment.all %}
+        <li class='row h-50 w-xl-100 py-3'>
+          <span style='border-left:1px solid gold'>
+            <a class='text-decoration-none' href="{% url 'profile' comment.user_comment %}">
+              <div class='p-0'>@{{ comment.user_comment | title}}</div>
+            </a>
+            <p style='font-size:10px'>{{comment.created_at|timesince}}</p>
+            <hr>
+            <p>{{ comment.context_comment }}</p>
+          </span>
+        </li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+      {% if request.user.is_authenticated %}
+      <form class="row container w-xl-100" action="" method="post">
+        {% csrf_token %}
+        <input class="col mx-3 rounded w-100 bg-dark text-light border" name='comment' placeholder='Comment...'>
+        <button class='col-2 rounded p-2 bg-secondary border-0'><svg xmlns="http://www.w3.org/2000/svg" width="25"
+            height="25" fill='#fff' class="bi bi-send" viewBox="0 0 16 16">
+            <path
+              d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z" />
+          </svg></button>
+      </form>
+      {% endif %}
+      {% endif %}
 
 
-        </article>
-      {% endfor %}
+    </article>
+    {% endfor %}
 
     {% else %}
-      <div class="no_post__wrapper">
-        <h4>There's no post(s) available. Create one :)</h4>
-      </div>
+    <div class="no_post__wrapper">
+      <h4>There's no post(s) available. Create one :)</h4>
+    </div>
 
     {% endif %}
 
